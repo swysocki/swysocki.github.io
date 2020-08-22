@@ -20,7 +20,7 @@
 
 title: Marginal Value
 email: swysocki@gmail.com
-logo: /assets/avatar.png
+logo: /assets/avatar-sm.png
 description: >- # this means to ignore newlines until "baseurl:"
   Small technical discoveries that are of marginal value.  Nothing too advanced, just simple solutions I stumble across that may be worth sharing.
 baseurl: "" # the subpath of your site, e.g. /blog
