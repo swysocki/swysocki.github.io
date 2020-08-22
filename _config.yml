@@ -18,16 +18,15 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Your awesome title
-email: your-email@example.com
+title: Marginal Value
+email: swysocki@gmail.com
+logo: https://avatars1.githubusercontent.com/u/5726438?s=460&u=4b13d25235d4157ec606cd191603ad54225920f5&v=4
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Small technical discoveries that are of marginal value.  Nothing too advanced, just simple solutions I stumble across that may be worth sharing.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "https://www.swysocki.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: dubsocks
+github_username:  swysocki
 
 # Build settings
 theme: jekyll-theme-minimal
