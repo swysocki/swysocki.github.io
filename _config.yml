@@ -22,7 +22,7 @@ title: Spare Cycles
 email: swysocki@gmail.com
 logo: /assets/avatar.png
 description: >- # this means to ignore newlines until "baseurl:"
-I'm Scott Wysocki, a Cloud Ops Engineer. By day I build large scale infrastructure, by night I tinker with the small details. This is where I write about the little things.
+  I'm Scott Wysocki, a Cloud Ops Engineer. By day I build large scale infrastructure, by night I tinker with the small details. This is where I write about the little things.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.swysocki.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: dubsocks
