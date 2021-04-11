@@ -5,7 +5,7 @@ tags:
   - devops
   - career
 ---
-Yes, I know. This horse is dead. We have all (mostly) accepted the fact that "DevOps Engineer" as a title is here to stay.  Companies advertise it in job descriptions. Engineers, including myself, have it on their resume.  So just move on, right? Sure, but there is something to be said for avoiding this title and positions that define it.  
+Yes, I know. This horse is dead. We have all (mostly) accepted the fact that "DevOps Engineer" as a title is here to stay.  Companies advertise it in job descriptions. Engineers, including myself, have it on their resume.  So just move on right? Sure, but there is something to be said for avoiding this title and positions that define it.  
 
 > There are large tech companies that practice DevOps without a single DevOps Engineer.  I think they have it right.
 
@@ -19,7 +19,7 @@ These misconceptions tend to fly in the face of the [DevOps philosophy](https://
 ![obligatory meme](https://i.redd.it/v96d297rszmy.jpg)
 
 ## What _Is_ my Title Then?
-I have two simple suggestions for this.  If your time is spent writing software - scripts, utilities or tooling - to support the process used to implement DevOps, you are a **Software Engineer** (SWE). You may not be contributing directly to the application itself, but you are still an SWE.  We have many facets of SWE - front-end, back-end, test - this just another one.  Bite the bullet and own the fact that you are building software in one of its many forms.
+I have two simple suggestions for this.  If your time is spent writing software - scripts, utilities or tooling - to support the process used to implement DevOps, you are a **Software Engineer** (SWE). You may not be contributing directly to the application itself, but you are still an SWE.  We have many facets of SWE - front-end, back-end, test - this is just another one.  Bite the bullet and own the fact that you are building software in one of its many forms.
 
 If that's not your main purpose and you focus on building, deploying and maintaining the underlying infrastructure for applications to run, you are **Operations**. This title is completely apt but seems to be avoided due to a perceived lack of sex appeal. Maybe Ops isn't a hot title these days but it is critical and avoiding the name masks the purpose of the team.
 
@@ -30,5 +30,5 @@ I've worked with many DevOps Engineers over the last few years.  Some absolutely
 
 Companies should be clear about what they need in an engineer. Simply stating that an engineer will be "DevOps" with a laundry list of tools and cloud provider experience says very little about the actual expectations.  
 
-As a potential employee you owe it to yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for. The best solution is to simplify our titles and own what we actully do in our profession. 
+As a potential employee you owe it to yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for. The best solution is to simplify our titles and own what we actually do in our profession, regardless of trends.
 
