@@ -5,8 +5,6 @@ tags:
   - devops
   - career
 ---
-# Is DevOps Engineer a Title?
-
 Yes, I know. This horse is dead. We have all (mostly) accepted the fact that "DevOps Engineer" as a title is here to stay.  Companies advertise it in job descriptions. Engineers, including myself, have it on their resume.  So just move on, right? Sure, but there is something to be said for avoiding this title and positions that define it.  
 
 > There are large tech companies that practice DevOps without a single DevOps Engineer.  I think they have it right.
