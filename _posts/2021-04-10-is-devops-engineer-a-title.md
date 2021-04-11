@@ -30,5 +30,5 @@ I've worked with many DevOps Engineers over the last few years.  Some absolutely
 
 Companies should be clear about what they need in an engineer. Simply stating that an engineer will be "DevOps" with a laundry list of tools and cloud provider experience says very little about the actual expectations.  
 
-As a potential employee you owe it yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for.  Or save us all some trouble and give your positions accurate names!
+As a potential employee you owe it to yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for. The best solution is to simplify our titles and own what we actully do in our profession. 
 
