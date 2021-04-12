@@ -22,7 +22,7 @@ title: blog.swysocki.com
 author: Scott Wysocki
 email: swysocki@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  I'm Scott and I build things; mostly software that helps power the cloud. I also love to tinker and talk about software. This is my space for that.
+  I'm Scott and I build software that helps power the cloud. I also love to tinker and talk about software. This is my space for that.
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: dubsocks
 github_username:  swysocki
