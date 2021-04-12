@@ -26,9 +26,9 @@ If that's not your main purpose and you focus on building, deploying and maintai
 There are, of course, times when the two suggestions overlap.  In that case feel free be inventive and give your Ops team a [sexy](https://engineering.fb.com/category/production-engineering/) [new](https://sre.google/) name.  Just make sure it isn't misleading and your adjacent teams know exactly what you provide.
 
 ## Is this Really Important?
-I've worked with many DevOps Engineers over the last few years.  Some absolutely cannot write code, some loath the idea of being typical ops tasks.  They were hired as "DevOps Engineers" but the ambiguous title lead to unrealistic expectations on behalf of the company and the engineer.  So yes, it matters.  It matters both to the company and to the individual engineer.
+I've worked with many DevOps Engineers over the last few years.  Some absolutely cannot write code, some loath the idea of doing typical ops tasks.  They were hired as "DevOps Engineers" but the ambiguous title lead to unrealistic expectations on behalf of the company and the engineer.  So yes, it matters.  It matters to both the company and the individual engineer.
 
 Companies should be clear about what they need in an engineer. Simply stating that an engineer will be "DevOps" with a laundry list of tools and cloud provider experience says very little about the actual expectations.  
 
-As a potential employee you owe it to yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for. The best solution is to simplify our titles and own what we actually do in our profession, regardless of trends.
+As a potential employee you owe it to yourself to ask about the exact nature of the position during the interview process.  As an employer be clear about the engineering skills and type of work you are hiring for. The best solution is to simplify our titles and own what we are actually do in our profession, regardless of trends.
 
