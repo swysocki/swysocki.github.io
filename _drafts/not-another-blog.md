@@ -11,3 +11,4 @@ My goal is to write something worth posting every month. It may be highly techin
 
 Regardless, I hope you enjoy my blog. Feel free to contact me with any input you have. Technical corrections, spelling errors, gramatical mistakes are all fair game.  Feedback, good or bad, means I have accomplished my goal.
 
+![obligatory meme](https://memegenerator.net/img/instances/52858699.jpg)
