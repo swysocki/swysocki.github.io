@@ -11,7 +11,7 @@ We've been bitten by this over and over.  Something that worked yesterday
 no longer works today.  You hear the cries, "I didn't change anything,
 it just broke!™".  Well, _something_ changed and when it comes to runtime
 environments, my instinct is to look for changes caused by a reusable
-reference such as "stable", "latest" or omitted versions.
+reference such as `stable`, `latest` or omitted versions.
 
 >  To avoid unexpected pain, production systems should always be built from 
 explicit versions.
