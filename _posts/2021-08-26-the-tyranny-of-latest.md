@@ -27,10 +27,10 @@ Docker image. _Typically_ this will be the newest version of the image
 Regardless of where `latest` points its implicit nature is the issue. An alias like
 `latest` is a big convenience when you are initially building applications. 
 Typically you don't know (or care) what version of an image you want and it makes
-sense to allow the image maintainer chose for you.  However, when you move to a
+sense to allow the image maintainer to choose for you.  However, when you move to a
 production environment this is needlessly risky.
 
-An implicit version like `latest` changes without warning each time your runtime
+An implicit version like `latest` can change without warning when your runtime
 environment is launched.  The convenience you received when building the application 
 is now a detriment.
 
@@ -44,11 +44,12 @@ begins: tracking down the actual issue.
 ![obligatory meme](https://en.meming.world/images/en/4/4a/Modern_Problems_Require_Modern_Solutions.jpg)
 
 If you suspect a Docker image changed due to an update to the `latest` reference, you 
-will need to find the output of a the last successful launch of the runtime environment
-and compare the two. Since we can no longer rely on the image's tag for comparison, we
+will need to find the output of a the last successful launch of the container
+and compare it with the failed one. Since we can no longer rely on the image tags for comparison, we
 will need to compare the image's **manifest hash**.  This is a bit tricky and I suggest you
-[read this first](https://blog.aquasec.com/docker-image-tags). Once you understand what
-you are looking for, compare a successful launch's manifest hash
+[read this first](https://blog.aquasec.com/docker-image-tags). 
+
+Once you understand what you are looking for, compare a successful launch's manifest hash
 to the hash of the broken build. If they are different you may have found your smoking
 gun. Now re-launch with the old hash and if things are working you understand exactly
 why unstable tags are evil.
@@ -57,14 +58,14 @@ why unstable tags are evil.
 
 In the case of Docker images, explicit versions can be a challenge.  I'm obviously advocating
 against using the `latest` tag, but then which tag should be used? Answering this takes
-some thought and inspection as images have no strict requirements for tags. Let's use
+some thought and inspection as image tags have no strict requirements. Let's use
 an example to demonstrate the process.  
 
 Let's use a Linux distribution as an example.  [Ubuntu's Docker image](https://hub.docker.com/_/ubuntu) is
 a perfect place to start. Ubuntu arranges their tags with a few levels of hierarchy.  At the top are
 `latest`, `rolling`, `devel`, etc.  These tags are convenient but not stable and will 
 change frequently.  The next, more specific tags is the distro name, such as `focal` or number
-such as `21.04`.  This tag _may_ be more stable, but is still going to change as updates or rolled out.
+such as `21.04`.  This tag _may_ be more stable, but is still going to change as updates are rolled out.
 The most specific tag offered by Ubuntu is a release with a distro name and timestamp, such
 as `focal-20210723`.  Using this tag will ensure the underlying Ubuntu system is stable
 until the tag is changed by the consumer.  This is the right amount of specificity for 
