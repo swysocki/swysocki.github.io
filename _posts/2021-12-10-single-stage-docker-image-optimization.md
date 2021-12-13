@@ -56,6 +56,8 @@ package needs to be installed?
 
 ## Leverage the Cache
 
+![obligatory meme](https://media.makeameme.org/created/cache-cache-everywhere.jpg)
+
 In the first example the purpose was to install the `requests` package so it makes 
 sense to have a layer encompassing those steps. Separating that layer into a layer
 for each package manager will allow further optimization while barely increasing the
