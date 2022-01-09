@@ -6,11 +6,10 @@ tags:
   - docker
   - containers
 ---
-It is Occasionally useful to pass sensitive information to the `docker build` process.
-It's typical to need AWS credentials (`.aws/credentials`) or an authentication
-secret when building an image. Regardless of the reason, this information is
-sensitive and care must be taken to ensure that this information is not leaked
-to consumers of the Docker image.
+It is occasionally useful to pass sensitive information such as AWS credentials
+(`.aws/credentials`) or authentication secrets when building a Docker image.
+Regardless of the reason, this information is sensitive and care must be taken
+to ensure that it is not leaked to consumers of the Docker image.
 
 Docker users make the mistake of passing sensitive information to their
 image via `--build-args` or as environment variables.  This has resulted in
@@ -24,7 +23,7 @@ seems like the correct approach because the secret isn't hard-coded in the Docke
 This is **not** what the ARG instruction is for and the issues caused by its use
 are easy to demonstrate.
 
-Here is an example `Dockerfile` that demonstrates an attempt to use the `ARG` instruction
+Here is an example `Dockerfile` that demonstrates using the `ARG` instruction
 to set a secret for use in a `curl` command.
 
 ```dockerfile
@@ -36,7 +35,7 @@ RUN curl -u "user:$MY_SECRET" https://ifconfig.me
 ```
 
 Building this image requires the `--build-arg` to set the `MY_SECRET` variable. For
-example: `docker build . -t bad_idea --build-arg MY_SECRET="abcdefg"`.  Now the
+example: `docker build . -t blogtest --build-arg MY_SECRET="abcdefg"`.  Now the
 image will use the value of `MY_SECRET` in the `curl` command.
 
 The issue here is, again, the `ARG` instruction was not meant to handle secrets and
@@ -58,21 +57,21 @@ d01dea2da844   17 minutes ago   RUN |1 MY_SECRET=abcdefg /bin/sh -c curl -u … 
 ![obligatory meme](https://i.imgflip.com/60mf8u.jpg)
 
 Previous versions of Docker had no straight-forward way of passing secrets when
-building an image. Ensuring that no sensitive data was written to an image required
-great care and attention to detail. The arrival of
+building an image. It took great care and attention to detail to ensure that no
+sensitive data remained in the image. The arrival of
 [Docker Buildkit](https://blog.mobyproject.org/introducing-buildkit-17e056cc5317)
 adds the [`--secret` option](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
 which provides a secure mechanism for passing sensitive information to an image.
 
 We can rewrite the above example using the new Buildkit options.  This requires one
-change the `Dockerfile`.
+change to the `Dockerfile`.
 
 ```dockerfile
 FROM alpine
 
 RUN apk update && apk add curl
 RUN --mount=type=secret,id=mysecret MY_SECRET=$(cat /run/secrets/mysecret ) \
-  && curl -u "user:$MY_SECRET" https://iconfig.me
+  && curl -u "user:$MY_SECRET" https://ifconfig.me
 ```
 
 We no longer need the `ARG` instruction.  Instead we use the `--mount` argument
@@ -103,12 +102,12 @@ ce5a8e6e0840   8 minutes ago   RUN /bin/sh -c MY_SECRET=$(cat /run/secrets/…  
 
 Success! No more leaked secrets. The image can now be safely distributed.
 
-## A Few Ops Notes
+## A Couple Secret Secrets
 
 There are a couple of rules to keep in mind when working with the `--mount` argument
 in a Dockerfile.
 
-- The secret you mount is available to the `RUN` instruction. Any following
+- The secret you mount is available to its `RUN` instruction. Any following
 `RUN` instructions will not have access to that secret.
 
 - The secret is mounted to a directory in `/run/secrets` named after the
