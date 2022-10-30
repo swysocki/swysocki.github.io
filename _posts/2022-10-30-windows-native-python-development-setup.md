@@ -1,13 +1,11 @@
-______________________________________________________________________
-
-layout: post title: Windows Native Python Development Setup tags:
-
+---
+layout: post
+title: Windows Native Python Development Setup
+tags:
 - python
 - development
 - windows
-
-______________________________________________________________________
-
+---
 I recently set out to test my
 [Python GPT imaging application](https://github.com/swysocki/gpt-image) on Windows. I have a laptop
 running Windows 11, fresh as fallen snow, and want to get it set up to test and develop Python on
@@ -67,9 +65,8 @@ Running `$env:Path` showed me that `C:\Program Files\Git\cmd` had been inserted 
 
 This is a bit clumsy but also quite interesting. If you type `python` or `python3` in Powershell, it
 doesn't run Python. It opens the Microsoft Store with the dialog to the Python installation page.
-This is a bit strange, but I understand how this can be helpful for newcomers.\
-Luckily the Store's
-Description field in the store gives us a clue about what is happening:
+This is a bit strange, but I understand how this can be helpful for newcomers. Luckily the store's
+Description field gives us a clue about what is happening:
 
 ```
 ==========
@@ -81,8 +78,8 @@ or open "Manage App Execution Aliases" from Start to disable the shortcuts.
 Windows uses
 [AppExecutionAlias](https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-extensions)
 to direct the `python` command to the Microsoft store. The instructions above give us two options to
-disable the behavior, modify the `$env:Path` or disable the aliases in the Setting UI. I that
-installing Python will place its Path variable at a higher priority than the alias.
+disable the behavior, modify the `$env:Path` or disable the aliases in the Setting UI. I assume that
+installing Python will place its path variable at a higher priority than the alias.
 
 ### Python Installation (for real this time)
 
@@ -94,7 +91,7 @@ aliases into something useful. I have seen some Stackoverflow questions about qu
 installed from the Microsoft Store, but I will have to see for myself.
 
 ```
-winget install -d --name "Python 3.8"
+winget install -e --name "Python 3.8"
 ```
 
 Excellent! Now when I type `python` or `python3` I receive the Python interactive interpreter.
