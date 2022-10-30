@@ -44,7 +44,7 @@ the fun part begins: tracking down the actual issue.
 ![obligatory meme](https://en.meming.world/images/en/4/4a/Modern_Problems_Require_Modern_Solutions.jpg)
 
 If you suspect a Docker image changed due to an update to the `latest`
-reference, you will need to find the output of a the last successful launch of
+reference, you will need to find the output of the last successful launch of
 the container and compare it with the failed one. Since we can no longer rely on
 the image tags for comparison, we will need to compare the image's
 **manifest hash**.  This is a bit tricky and I suggest you
@@ -75,7 +75,7 @@ until the tag is changed by the consumer.  This is the right amount of specifici
 for production systems.
 
 The point is, you will have to do a bit of detective work to find the stable tag
-to use in your application.  Do not assume that a tag like `21.04` we remain stable
+to use in your application.  Do not assume that a tag like `21.04` will remain stable
 even though it *seems* specific.
 
 ## This Seems Like a Lot of Work
