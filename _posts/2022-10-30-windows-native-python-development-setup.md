@@ -54,7 +54,7 @@ because it strips away all the things I don't need. However; WinGet does not con
 package so we are stuck with it or crafting an alternate installation mechanism. So the full
 Git-for-Windows it shall be.
 
-```
+```posh
 winget install -e --id Git.Git
 ```
 
@@ -68,7 +68,7 @@ doesn't run Python. It opens the Microsoft Store with the dialog to the Python i
 This is a bit strange, but I understand how this can be helpful for newcomers. Luckily the store's
 Description field gives us a clue about what is happening:
 
-```
+```posh
 ==========
 Expected your existing copy of Python to run? Either update your PATH to raise its priority, 
 or open "Manage App Execution Aliases" from Start to disable the shortcuts.
@@ -90,7 +90,7 @@ because you would receive updates through the store's mechanism and it would tur
 aliases into something useful. I have seen some Stackoverflow questions about quirks with Python
 installed from the Microsoft Store, but I will have to see for myself.
 
-```
+```posh
 winget install -e --name "Python 3.8"
 ```
 
@@ -101,7 +101,7 @@ Excellent! Now when I type `python` or `python3` I receive the Python interactiv
 I typically work from a Python Virtual Environment so my first stop with our new Python is to create
 a virtual environment, activate it and install some packages.
 
-```
+```posh
 PS C:\Users\scott> python3 -m venv test-venv
 PS C:\Users\scott> .\test-venv\Scripts\Activate.ps1
 .\test-venv\Scripts\Activate.ps1 : File C:\Users\scott\test-venv\Scripts\Activate.ps1 cannot be loaded because running
@@ -120,7 +120,7 @@ to `Restricted` out of the box, so executing the activation script will be block
 open PowerShell as an Administrator (hold the `ctrl` key while clicking on PowerShell) and execute
 the following command:
 
-```
+```posh
 Set-ExecutionPolicy RemoteSigned
 ```
 
@@ -132,7 +132,7 @@ I use [pipx](https://github.com/pypa/pipx) to install Python CLI applications th
 system-wide. For example, I want the [yamllint](https://github.com/adrienverge/yamllint) utility
 available globally on the CLI. So now I am setting up Pipx to install those types of packages.
 
-```
+```posh
 PS C:\Users\scott> python3 -m pip install --no-cache-dir pipx
 Collecting pipx
   Downloading pipx-1.1.0-py3-none-any.whl (55 kB)
@@ -156,7 +156,7 @@ Successfully installed argcomplete-2.0.0 click-8.1.3 colorama-0.4.6 pipx-1.1.0
 The pipx utility is kind enough to warn us that its executable is not in our system's path, but it
 also includes a command that will fix it.
 
-```
+```posh
 PS C:\Users\scott> python3 -m pipx ensurepath
 Success! Added C:\Users\scott\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\loca
     l-packages\Python38\Scripts to the PATH environment variable.
@@ -172,7 +172,7 @@ Otherwise pipx is ready to go! ✨ 🌟 ✨
 > I have grown tired of closing my terminal to get my updated path so I looked up a command that
 > will reload it with the new variables:
 
-```
+```posh
 PS C:\Users\scott> $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 ```
 
@@ -184,14 +184,14 @@ I also want to test my application in Python 3.10 and I don't want to uninstall 
 3.8. I was concerned that using WinGet to install an updated version of Python would render all of
 my previous work useless. For the sake of science, I did it anyway.
 
-```
+```posh
 winget install -e --name "Python 3.10"
 ```
 
 Now my current Python remains the default and the new Python can be accessed explicitly. This is the
 behavior I wanted but honestly didn't expect.
 
-```
+```posh
 PS C:\Users\scott> python --version
 Python 3.8.10
 PS C:\Users\scott> python3.10 --version
