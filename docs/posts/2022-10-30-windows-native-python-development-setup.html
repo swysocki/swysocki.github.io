@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<head>
+  <title>My Blog::Windows Native Python Development Setup</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+<header>
+<nav>
+<a href="/">Home</a>
+</a>
+</nav>
+<h1>Scott Wysocki</h1>
+</header>
+<main>
+
+<script>hljs.highlightAll();</script>
+<article>
+<h2>Windows Native Python Development Setup</h2>
+
+<p>I recently set out to test my
+<a href="https://github.com/swysocki/gpt-image">Python GPT imaging application</a> on Windows. I have a laptop
+running Windows 11, fresh as fallen snow, and want to get it set up to test and develop Python on
+Windows. Sure, I could have opted for WSL and I am <em>very</em> tempted to do that because I have
+<a href="https://github.com/swysocki/dotfiles/tree/master/ansible">Ansible automation</a> that would set up the
+entire environment for me. But that would just be testing on Linux, I want to use the Windows OS
+itself!</p>
+<p>This post is bound to be lengthy, so I am going to add links to each section as I write it. Feel
+free to skip to the section that interests you.</p>
+<ul>
+<li><a href="#package-management">Package Management</a></li>
+<li><a href="#git-client-installation">Git Client Installation</a></li>
+<li><a href="#python-installation">Python Installation</a></li>
+</ul>
+<h2>Package Management</h2>
+<p>I'm admittedly more comfortable with Homebrew, Apt, and Yum for installing development tools. I
+don't have a lot of experience with what tool to use for Windows but I know I <em>want</em> a command line
+tool so I can codify and reproduce my setup. I only need to install a handful of packages, but I
+want their installation to be scriptable and thus it would be convenient to use a package manager.
+Windows has some options in this space, which is great. Here's a quick list of the ones that stand
+out.</p>
+<ul>
+<li><a href="https://github.com/microsoft/winget-cli">WinGet</a>: Built into Windows 11. Has multiple sources
+including the Windows Store.</li>
+<li><a href="https://scoop.sh">Scoop</a>: Third party. Has a mountain of packages and minimizes the <code>PATH</code>
+environment variable entries.</li>
+<li><a href="http://chocoloatey.org">Chocolatey</a>: Third party, extensive package list, also seems to have an
+enterprise focus.</li>
+</ul>
+<p>I really want to use WinGet because it is built into the OS already. The only issue I have is that
+its package selection isn't as thorough as Scoop or Chocolatey. It also uses the Windows Store as a
+source for some packages, which isn't exactly what I had in mind. But I'm going to give it a go
+anyway! My needs are really simple, I just need a small set of packages to develop and run my Python
+application.</p>
+<h2>Git Client Installation</h2>
+<p>First stop, install a Git client. I'll admit, there are many. I frankly have no need for a GUI
+client or anything beyond the traditional Git CLI. This is challenging because
+<a href="https://gitforwindows.org">Git For Windows</a> comes with Git Bash, Git GUI and Shell Integration
+(right-click in Windows Explorer modal). What I <em>want</em> is
+<a href="https://devblogs.microsoft.com/devops/whats-new-in-git-for-windows-2-10/#mingit-git-for-windows-applications">MinGit</a>
+because it strips away all the things I don't need. However; WinGet does not contain the MinGit
+package so we are stuck with it or crafting an alternate installation mechanism. So the full
+Git-for-Windows it shall be.</p>
+<pre><code class="language-posh">winget install -e --id Git.Git
+</code></pre>
+<p>Restart Powershell after the installation completes and you will have <code>git</code> command available.
+Running <code>$env:Path</code> showed me that <code>C:\Program Files\Git\cmd</code> had been inserted in my Path.</p>
+<h2>Python Installation</h2>
+<p>This is a bit clumsy but also quite interesting. If you type <code>python</code> or <code>python3</code> in Powershell, it
+doesn't run Python. It opens the Microsoft Store with the dialog to the Python installation page.
+This is a bit strange, but I understand how this can be helpful for newcomers. Luckily the store's
+Description field gives us a clue about what is happening:</p>
+<pre><code class="language-posh">==========
+Expected your existing copy of Python to run? Either update your PATH to raise its priority, 
+or open &quot;Manage App Execution Aliases&quot; from Start to disable the shortcuts.
+==========
+</code></pre>
+<p>Windows uses
+<a href="https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-extensions">AppExecutionAlias</a>
+to direct the <code>python</code> command to the Microsoft store. The instructions above give us two options to
+disable the behavior, modify the <code>$env:Path</code> or disable the aliases in the Setting UI. I assume that
+installing Python will place its path variable at a higher priority than the alias.</p>
+<h3>Python Installation (for real this time)</h3>
+<p>My Python application uses Python 3.8 as its minimal version so that is what I will set out to
+install. There are a couple of options with WinGet for this. You can either install from the
+<code>winget</code> source or the <code>msstore</code> source. It would be convenient to install from the Microsoft Store
+because you would receive updates through the store's mechanism and it would turn the aforementioned
+aliases into something useful. I have seen some Stackoverflow questions about quirks with Python
+installed from the Microsoft Store, but I will have to see for myself.</p>
+<pre><code class="language-posh">winget install -e --name &quot;Python 3.8&quot;
+</code></pre>
+<p>Excellent! Now when I type <code>python</code> or <code>python3</code> I receive the Python interactive interpreter.</p>
+<h3>Test Driving Python</h3>
+<p>I typically work from a Python Virtual Environment so my first stop with our new Python is to create
+a virtual environment, activate it and install some packages.</p>
+<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m venv test-venv
+PS C:\Users\scott&gt; .\test-venv\Scripts\Activate.ps1
+.\test-venv\Scripts\Activate.ps1 : File C:\Users\scott\test-venv\Scripts\Activate.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ .\test-venv\Scripts\Activate.ps1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+
+</code></pre>
+<p>If you receive this error, it's because PowerShell's Execution Policy is set too strictly. It is set
+to <code>Restricted</code> out of the box, so executing the activation script will be blocked. To fix this,
+open PowerShell as an Administrator (hold the <code>ctrl</code> key while clicking on PowerShell) and execute
+the following command:</p>
+<pre><code class="language-posh">Set-ExecutionPolicy RemoteSigned
+</code></pre>
+<p>Now you can activate your virtual environment and install packages.</p>
+<h3>Additional Python Packages</h3>
+<p>I use <a href="https://github.com/pypa/pipx">pipx</a> to install Python CLI applications that I want available
+system-wide. For example, I want the <a href="https://github.com/adrienverge/yamllint">yamllint</a> utility
+available globally on the CLI. So now I am setting up Pipx to install those types of packages.</p>
+<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m pip install --no-cache-dir pipx
+Collecting pipx
+  Downloading pipx-1.1.0-py3-none-any.whl (55 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 55.4/55.4 kB 960.8 kB/s eta 0:00:00
+Requirement already satisfied: packaging&gt;=20.0 in c:\users\scott\appdata\local\packages\pythonsoftwarefoundation.python.3.8_qbz5n2kfra8p0\localcache\local-packages\python38\site-packages (from pipx) (21.3)
+Collecting argcomplete&gt;=1.9.4
+  Downloading argcomplete-2.0.0-py2.py3-none-any.whl (37 kB)
+Collecting colorama&gt;=0.4.4
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Requirement already satisfied: userpath&gt;=1.6.0 in c:\users\scott\appdata\local\packages\pythonsoftwarefoundation.python.3.8_qbz5n2kfra8p0\localcache\local-packages\python38\site-packages (from pipx) (1.8.0)
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in c:\users\scott\appdata\local\packages\pythonsoftwarefoundation.python.3.8_qbz5n2kfra8p0\localcache\local-packages\python38\site-packages (from packaging&gt;=20.0-&gt;pipx) (3.0.9)
+Collecting click
+  Downloading click-8.1.3-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.6/96.6 kB 918.6 kB/s eta 0:00:00
+Installing collected packages: colorama, argcomplete, click, pipx
+  WARNING: The script pipx.exe is installed in 'C:\Users\scott\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\local-packages\Python38\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed argcomplete-2.0.0 click-8.1.3 colorama-0.4.6 pipx-1.1.0
+</code></pre>
+<p>The pipx utility is kind enough to warn us that its executable is not in our system's path, but it
+also includes a command that will fix it.</p>
+<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m pipx ensurepath
+Success! Added C:\Users\scott\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\loca
+    l-packages\Python38\Scripts to the PATH environment variable.
+Success! Added C:\Users\scott\.local\bin to the PATH environment variable.
+
+Consider adding shell completions for pipx. Run 'pipx completions' for instructions.
+
+You will need to open a new terminal or re-login for the PATH changes to take effect.
+
+Otherwise pipx is ready to go! ✨ 🌟 ✨
+</code></pre>
+<blockquote>
+<p>I have grown tired of closing my terminal to get my updated path so I looked up a command that
+will reload it with the new variables:</p>
+</blockquote>
+<pre><code class="language-posh">PS C:\Users\scott&gt; $env:Path = [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;Machine&quot;) + &quot;;&quot; + [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;User&quot;)
+</code></pre>
+<p>Now pipx is in our path and we can install all the Python CLI apps we regularly use!</p>
+<h3>Multiple Python Versions (living dangerously)</h3>
+<p>I also want to test my application in Python 3.10 and I don't want to uninstall my base version of
+3.8. I was concerned that using WinGet to install an updated version of Python would render all of
+my previous work useless. For the sake of science, I did it anyway.</p>
+<pre><code class="language-posh">winget install -e --name &quot;Python 3.10&quot;
+</code></pre>
+<p>Now my current Python remains the default and the new Python can be accessed explicitly. This is the
+behavior I wanted but honestly didn't expect.</p>
+<pre><code class="language-posh">PS C:\Users\scott&gt; python --version
+Python 3.8.10
+PS C:\Users\scott&gt; python3.10 --version
+Python 3.10.8
+</code></pre>
+<h3>Summary</h3>
+<p>Bottom line: pick an install mechanism and stick with it. If you use the Microsoft Store to install
+Python, stick with that. The same goes for the official Python installer package. Mixing them breaks
+the paths that get set up and can be quite a headache.</p>
+
+</article> 
+
+</main>
+<footer>
+  <span>
+    <a href="mailto:sywsocki@gmail.com">
+    <svg viewBox="0 0 8 6" height=24>
+      <path fill="#828282" d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
+    </svg></a>
+  </span>
+  <span>
+    <a href="https://www.github.com/swysocki">
+      <svg viewBox="0 0 16 16" width=26 height=26>
+        <path fill="#828282" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68
+        0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
+        3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg></a>
+  </span>
+  <span>
+    <a href="https://www.linkedin.com/in/swysocki22">
+      <svg viewBox="0 0 512 512" width=26 height=26>
+        <path fill="#828282" d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683
+        C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z
+        M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615
+        c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915
+        s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z"/>
+      </svg></a>
+  </span>
+
+</footer>
+</body>
+</html>

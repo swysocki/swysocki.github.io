@@ -1,0 +1,9 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+<script>hljs.highlightAll();</script>
+<article>
+<h2>{{ post_title }}</h2>
+{{ body_content }}
+</article> 
+{% endblock %}

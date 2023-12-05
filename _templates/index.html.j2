@@ -1,0 +1,12 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+<ul>
+{% for post in post_list %}
+    <p>
+        <a class="articlelist" href="{{ post.post_link }}">{{ post.post_title }}</a>
+        {{ post.date }}
+    </p>
+{% endfor %}
+</ul>
+{% endblock %}
