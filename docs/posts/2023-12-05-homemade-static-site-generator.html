@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+  <title>My Blog::I Wrote a Static Site Generator</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+<header>
+<h1><a href="/">swysocki.com</a></h1>
+</header>
+<main>
+
+<script>hljs.highlightAll();</script>
+<article>
+<h2>I Wrote a Static Site Generator</h2>
+
+<p>It's not that great static site generators (SSG) don't exist.  Let's be honest,
+<a href="https://jamstack.org/generators/">we don't need more of them</a>. But that has never
+stopped me before.  The motivation here was that I wanted something simple, with
+minimal dependencies, tailorable to my needs.  My previous SSG, <a href="jekyllrb.com">Jekyll</a>,
+works seamlessly with Github pages, making it an easy choice.  But Jekyll has way more
+features than I need, making it harder to modify and more dependencies to manage.</p>
+<p>I had very minimal criteria for my SSG:</p>
+<ol>
+<li>
+<p>I wanted to use my Jekyll files as-is. I didn't want to change any of the content if
+I could avoid it. That will make the transition simple and allow me to migrate elsewhere
+if I want.</p>
+</li>
+<li>
+<p>My generator would be written in Python. I may change this later but for now, Python
+will get me there quicker.</p>
+</li>
+</ol>
+<p>With that in mind, I needed to choose the building blocks of my generator.</p>
+<h2>The Shoulders of Giants</h2>
+<p>The process was simpler than I expected, it's almost like the components are just lying around waiting to be assembled.  So that is essentially what I did. I knew I was going
+to write it in Python from the start, so I filled in the blanks with some solid,
+off-the-shelf libraries.</p>
+<h3>Markdown to HTML Library</h3>
+<p>There are lots, but I chose <a href="https://github.com/executablebooks/markdown-it-py">markdown-it-py</a> which seems vastly underrated. It's a port of the
+<a href="https://github.com/markdown-it/markdown-it">markdown-it</a> Javascript library, but doesn't
+have quite as much traction.  Nonetheless, it has all the pieces I need.  The most
+notable feature is the plugin system. I use the Plugin Extensions to read Markdown
+<a href="https://mdit-py-plugins.readthedocs.io/en/latest/#front-matter">Front Matter</a>.
+My old Jekyll posts contain Front Matter that I don't want to lose, so this piece is
+important.</p>
+<h3>Template Library</h3>
+<p>This is a no-brainer in Python, it's <a href="https://jinja.palletsprojects.com/en/3.0.x/">Jinja</a>.
+Jinja is about as ubiquitous as a third-party library gets. It has everything you could
+want from a templating library and I have a great deal of experience with it from other
+projects.</p>
+<h2>Putting it Together</h2>
+<p>I wrote what I assume is the typical formula for a generator:</p>
+<ul>
+<li>Read in Markdown files, converting them to HTML</li>
+<li>Add the converted HTML to templates</li>
+<li>Output the template to HTML files</li>
+</ul>
+<p>With just a bit of Python &quot;glue&quot; was able to give myself a minimally functioning
+generator in about 150 lines of code. It's nothing beautiful, but it's functional
+and once I wire up CI/CD it will be automatic.</p>
+<p>Unnecessary, sure but that wasn't the point. It was a fun little project and I'm
+excited to continue extending <a href="https://github.com/swysocki/staffsergeant">Staff Sergeant</a>
+(because it's an SSG, get it?).</p>
+
+</article> 
+
+</main>
+<footer>
+  <span>
+    <a href="mailto:sywsocki@gmail.com">
+    <svg viewBox="0 0 8 6" height=24>
+      <path fill="#828282" d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
+    </svg></a>
+  </span>
+  <span>
+    <a href="https://www.github.com/swysocki">
+      <svg viewBox="0 0 16 16" width=26 height=26>
+        <path fill="#828282" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68
+        0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
+        3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg></a>
+  </span>
+  <span>
+    <a href="https://www.linkedin.com/in/swysocki22">
+      <svg viewBox="0 0 512 512" width=26 height=26>
+        <path fill="#828282" d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683
+        C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z
+        M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615
+        c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915
+        s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z"/>
+      </svg></a>
+  </span>
+
+</footer>
+</body>
+</html>
