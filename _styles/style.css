@@ -2,8 +2,16 @@
   text-decoration: none;
 }
 
+article {
+  border: none;
+}
+
 footer span {
   margin-right: 2em;
+}
+
+a {
+  text-decoration: none;
 }
 
 .icon {
