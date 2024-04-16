@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <head>
   <title>My Blog::I Wrote a Static Site Generator</title>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <!-- stolen from http://evenbettermotherfucking.website -->
+  <style>
+      body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 800px;}
+      code {background: white;}
+      a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+      a:hover {border-bottom: 0;}
+      footer {font-size: 12px; } 
+  </style>
 </head>
 <body>
 <header>
-<h1><a href="/">swysocki.com</a></h1>
+  <img src="/images/avatar.png" width="100" height="100">
 </header>
 <main>
 
-<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
 <article>
 <h2>I Wrote a Static Site Generator</h2>
 
@@ -40,8 +46,9 @@ will get me there quicker.</p>
 to write it in Python from the start, so I filled in the blanks with some solid,
 off-the-shelf libraries.</p>
 <h3>Markdown to HTML Library</h3>
-<p>There are lots, but I chose <a href="https://github.com/executablebooks/markdown-it-py">markdown-it-py</a> which seems vastly underrated. It's a port of the
-<a href="https://github.com/markdown-it/markdown-it">markdown-it</a> Javascript library, but doesn't
+<p>There are lots, but I chose <a href="https://github.com/executablebooks/markdown-it-py">markdown-it-py</a>
+which seems vastly underrated. It's a port of the
+<a href="https://github.com/markdown-it/markdown-it">markdown-it</a> Javascript library but doesn't
 have quite as much traction.  Nonetheless, it has all the pieces I need.  The most
 notable feature is the plugin system. I use the Plugin Extensions to read Markdown
 <a href="https://mdit-py-plugins.readthedocs.io/en/latest/#front-matter">Front Matter</a>.
@@ -70,34 +77,7 @@ excited to continue extending <a href="https://github.com/swysocki/staffsergeant
 
 </main>
 <footer>
-  <span>
-    <a href="mailto:swysocki@gmail.com">
-    <svg viewBox="0 0 8 6" height=24>
-      <path fill="#828282" d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
-    </svg></a>
-  </span>
-  <span>
-    <a href="https://www.github.com/swysocki">
-      <svg viewBox="0 0 16 16" width=26 height=26>
-        <path fill="#828282" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
-        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68
-        0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
-        3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-      </svg></a>
-  </span>
-  <span>
-    <a href="https://www.linkedin.com/in/swysocki22">
-      <svg viewBox="0 0 512 512" width=26 height=26>
-        <path fill="#828282" d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683
-        C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z
-        M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615
-        c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915
-        s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z"/>
-      </svg></a>
-  </span>
-
+  <p>brought to you by<a href="/"> swysocki.com </a> &#x1F919;</p>
 </footer>
 </body>
 </html>

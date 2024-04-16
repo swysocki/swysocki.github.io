@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <head>
   <title>My Blog::Single Stage Docker Image Optimizations</title>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <!-- stolen from http://evenbettermotherfucking.website -->
+  <style>
+      body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 800px;}
+      code {background: white;}
+      a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+      a:hover {border-bottom: 0;}
+      footer {font-size: 12px; } 
+  </style>
 </head>
 <body>
 <header>
-<h1><a href="/">swysocki.com</a></h1>
+  <img src="/images/avatar.png" width="100" height="100">
 </header>
 <main>
 
-<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
 <article>
 <h2>Single Stage Docker Image Optimizations</h2>
 
-<p>Docker images are simple to create; add a handful of commands to a <code>Dockerfile</code>,
-run <code>docker build . -t my-image</code> and out comes a beautiful, hand-crafted Docker
-image ready to be used.  This simplicity is beautiful but also a double-edged sword.</p>
-<p>Creating a production ready Docker image takes optimization and this beautiful simplicity
+<p>Docker images are simple to create; add a handful of commands to a <code>Dockerfile</code>, and run
+<code>docker build . -t my-image</code> and out comes a beautiful, hand-crafted Docker
+image ready to be used.  This simplicity is beautiful but also a double-edged sword.
+Creating a production-ready Docker image takes optimization and this beautiful simplicity
 becomes much more complex.  Image size reduction is one of the first optimizations
 made when preparing Docker images for production.  While image size and layer
-optimization should be a priority preparing an image for production, proper use of
+optimization should be a priority in preparing an image for production, proper use of
 the Docker cache is essential.</p>
 <blockquote>
 <p>Production Docker images should optimize cache usage not just layer size</p>
@@ -36,8 +42,7 @@ in one fell swoop.  For example, it is common to use multiple package managers i
 single layer to optimize size and reduce layer count.</p>
 <p>Let's use the example of installing the popular Python
 <a href="https://docs.python-requests.org/en/latest/">requests</a> package on a Debian base image.</p>
-<pre><code># Dockerfile
-FROM debian:bullseye
+<pre><code class="language-dockerfile">FROM debian:bullseye
 RUN apt-get update &amp;&amp; \
   apt-get install -–no-install-recommends --yes \
   python3-pip &amp;&amp; \
@@ -46,21 +51,19 @@ RUN apt-get update &amp;&amp; \
 </code></pre>
 <p>This results in a single layer added to our new image. Using the <code>docker history</code> command the
 results can be inspected.</p>
-<pre><code>IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+<pre><code class="language-text">IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
 538caa27ded2   11 seconds ago   RUN /bin/sh -c apt-get update &amp;&amp;   apt-get i…   44.7MB    buildkit.dockerfile.v0
 </code></pre>
-<p>The image now has an additional layer that added 44 MB on disk. This is relatively compact
+<p>The image now has an additional layer that added 44 MB to the disk. This is relatively compact
 and demonstrates combining package managers, <code>apt-get</code> and <code>pip</code>, while installing multiple packages with them.
 It's tough to argue that there is a downside to this pattern, but what happens when an additional
 package needs to be installed?</p>
 <h2>Leverage the Cache</h2>
-<p><img src="https://media.makeameme.org/created/cache-cache-everywhere.jpg" alt="obligatory meme" /></p>
-<p>In the first example the purpose was to install the <code>requests</code> package so it makes
+<p>In the first example, the purpose was to install the <code>requests</code> package so it makes
 sense to have a layer encompassing those steps. Separating that layer into a layer
 for each package manager will allow further optimization while barely increasing the
 size of the total image.</p>
-<pre><code># Dockerfile
-FROM debian:bullseye
+<pre><code class="language-dockerfile">FROM debian:bullseye
 RUN apt-get update &amp;&amp; \
   apt-get install -–no-install-recommends --yes \
   python3-pip &amp;&amp; \
@@ -68,30 +71,29 @@ RUN apt-get update &amp;&amp; \
 RUN pip3 install requests
 </code></pre>
 <p>Once again <code>docker history</code> can be used to inspect the image results. Some quick
-math shows that the additional layer has a negligible impact on total size.</p>
-<pre><code>IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+math shows that the additional layer has a negligible impact on the total size.</p>
+<pre><code class="language-text">IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
 7781901ba6fb   8 seconds ago    RUN /bin/sh -c pip3 install requests # build…   2.56MB    buildkit.dockerfile.v0
 &lt;missing&gt;      10 seconds ago   RUN /bin/sh -c apt-get update &amp;&amp;   apt-get i…   42.1MB    buildkit.dockerfile.v0
 </code></pre>
 <p>Having a separate layer for the <code>apt-get</code> commands and the <code>pip</code> commands allows efficient
-use of Docker cache.  In the next example an additional Python package, the wonderful
+use of the Docker cache.  In the next example an additional Python package, the wonderful
 <a href="https://github.com/willmcgugan/rich">rich</a>, is added to the image.</p>
-<pre><code># Dockerfile
-FROM debian:bullseye
+<pre><code class="language-dockerfile">FROM debian:bullseye
 RUN apt-get update &amp;&amp; \
   apt-get install -–no-install-recommends --yes \
   python3-pip &amp;&amp; \
   rm -rf /var/lib/apt/lists/*
 RUN pip3 install requests rich
 </code></pre>
-<p>Docker Buildkit will now pull the layer created with the <code>apt-get</code> commands from cache and create a
+<p>Docker Buildkit will now pull the layer created with the <code>apt-get</code> commands from the cache and create a
 new layer created by the <code>pip</code> command.  This will dramatically increase the speed of the build as
 <code>apt-get</code> will not need to be run. If the Dockerfile was still using a single layer
-the entire <code>apt-get</code> command would need to be re-run.  In this case only the <code>pip</code> step
+the entire <code>apt-get</code> command would need to be re-run.  In this case, only the <code>pip</code> step
 changes, resulting in a much more efficient image build.</p>
 <p>Buildkit's output will reflect that the cache is being used by marking the layer as <code>CACHED</code>. This
-denotes successful use of the caching mechanism and a reduction in build time.</p>
-<pre><code>=&gt; CACHED [2/3] RUN apt-get update &amp;&amp;   apt-get install --no-install-recommends -y   python3  0.0s
+denotes the successful use of the caching mechanism and a reduction in build time.</p>
+<pre><code class="language-text">=&gt; CACHED [2/3] RUN apt-get update &amp;&amp; apt-get install --no-install-recommends -y python3  0.0s
 </code></pre>
 <p>It's important to realize the power of utilizing the Docker cache when building images.
 The are many caveats to its use; layer ordering and command functionality will
@@ -101,9 +103,9 @@ any good documentation, but watch the
 <h2>Simple Optimizations with Large Impacts</h2>
 <p>The results of these small cache optimizations can have a huge influence on build time
 and bandwidth usage in modern CI/CD systems.  The previous example is quite compact
-but in production a Docker image may download many gigabytes of packages or SDK's.</p>
+but in production, a Docker image may download many gigabytes of packages or SDK's.</p>
 <p>Creating modular, cacheable layers will have a positive effect on many facets of application infrastructure.
-Optimized builds reduce pipeline execution time, container deployment time, save storage space and
+Optimized builds reduce pipeline execution time, and container deployment time, save storage space and
 reduce bandwidth costs.  Spend some time reviewing and improving your Docker image declarations, it will
 have a large impact on your DevOps environment.</p>
 
@@ -111,34 +113,7 @@ have a large impact on your DevOps environment.</p>
 
 </main>
 <footer>
-  <span>
-    <a href="mailto:swysocki@gmail.com">
-    <svg viewBox="0 0 8 6" height=24>
-      <path fill="#828282" d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
-    </svg></a>
-  </span>
-  <span>
-    <a href="https://www.github.com/swysocki">
-      <svg viewBox="0 0 16 16" width=26 height=26>
-        <path fill="#828282" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
-        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68
-        0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
-        3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-      </svg></a>
-  </span>
-  <span>
-    <a href="https://www.linkedin.com/in/swysocki22">
-      <svg viewBox="0 0 512 512" width=26 height=26>
-        <path fill="#828282" d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683
-        C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z
-        M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615
-        c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915
-        s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z"/>
-      </svg></a>
-  </span>
-
+  <p>brought to you by<a href="/"> swysocki.com </a> &#x1F919;</p>
 </footer>
 </body>
 </html>

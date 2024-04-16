@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <head>
   <title>My Blog::Windows Native Python Development Setup</title>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <!-- stolen from http://evenbettermotherfucking.website -->
+  <style>
+      body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 800px;}
+      code {background: white;}
+      a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+      a:hover {border-bottom: 0;}
+      footer {font-size: 12px; } 
+  </style>
 </head>
 <body>
 <header>
-<h1><a href="/">swysocki.com</a></h1>
+  <img src="/images/avatar.png" width="100" height="100">
 </header>
 <main>
 
-<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
 <article>
 <h2>Windows Native Python Development Setup</h2>
 
@@ -61,7 +67,7 @@ package so we are stuck with it or crafting an alternate installation mechanism.
 Git-for-Windows it shall be.</p>
 <pre><code class="language-posh">winget install -e --id Git.Git
 </code></pre>
-<p>Restart Powershell after the installation completes and you will have <code>git</code> command available.
+<p>Restart Powershell after the installation completes and you will have the <code>git</code> command available.
 Running <code>$env:Path</code> showed me that <code>C:\Program Files\Git\cmd</code> had been inserted in my Path.</p>
 <h2>Python Installation</h2>
 <p>This is a bit clumsy but also quite interesting. If you type <code>python</code> or <code>python3</code> in Powershell, it
@@ -91,7 +97,7 @@ installed from the Microsoft Store, but I will have to see for myself.</p>
 <h3>Test Driving Python</h3>
 <p>I typically work from a Python Virtual Environment so my first stop with our new Python is to create
 a virtual environment, activate it and install some packages.</p>
-<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m venv test-venv
+<pre><code class="language-text">PS C:\Users\scott&gt; python3 -m venv test-venv
 PS C:\Users\scott&gt; .\test-venv\Scripts\Activate.ps1
 .\test-venv\Scripts\Activate.ps1 : File C:\Users\scott\test-venv\Scripts\Activate.ps1 cannot be loaded because running
 scripts is disabled on this system. For more information, see about_Execution_Policies at
@@ -114,7 +120,7 @@ the following command:</p>
 <p>I use <a href="https://github.com/pypa/pipx">pipx</a> to install Python CLI applications that I want available
 system-wide. For example, I want the <a href="https://github.com/adrienverge/yamllint">yamllint</a> utility
 available globally on the CLI. So now I am setting up Pipx to install those types of packages.</p>
-<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m pip install --no-cache-dir pipx
+<pre><code class="language-text">PS C:\Users\scott&gt; python3 -m pip install --no-cache-dir pipx
 Collecting pipx
   Downloading pipx-1.1.0-py3-none-any.whl (55 kB)
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 55.4/55.4 kB 960.8 kB/s eta 0:00:00
@@ -135,7 +141,7 @@ Successfully installed argcomplete-2.0.0 click-8.1.3 colorama-0.4.6 pipx-1.1.0
 </code></pre>
 <p>The pipx utility is kind enough to warn us that its executable is not in our system's path, but it
 also includes a command that will fix it.</p>
-<pre><code class="language-posh">PS C:\Users\scott&gt; python3 -m pipx ensurepath
+<pre><code class="language-text">PS C:\Users\scott&gt; python3 -m pipx ensurepath
 Success! Added C:\Users\scott\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\LocalCache\loca
     l-packages\Python38\Scripts to the PATH environment variable.
 Success! Added C:\Users\scott\.local\bin to the PATH environment variable.
@@ -150,18 +156,18 @@ Otherwise pipx is ready to go! ✨ 🌟 ✨
 <p>I have grown tired of closing my terminal to get my updated path so I looked up a command that
 will reload it with the new variables:</p>
 </blockquote>
-<pre><code class="language-posh">PS C:\Users\scott&gt; $env:Path = [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;Machine&quot;) + &quot;;&quot; + [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;User&quot;)
+<pre><code class="language-powershell">$env:Path = [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;Machine&quot;) + &quot;;&quot; + [System.Environment]::GetEnvironmentVariable(&quot;Path&quot;,&quot;User&quot;)
 </code></pre>
 <p>Now pipx is in our path and we can install all the Python CLI apps we regularly use!</p>
 <h3>Multiple Python Versions (living dangerously)</h3>
 <p>I also want to test my application in Python 3.10 and I don't want to uninstall my base version of
 3.8. I was concerned that using WinGet to install an updated version of Python would render all of
 my previous work useless. For the sake of science, I did it anyway.</p>
-<pre><code class="language-posh">winget install -e --name &quot;Python 3.10&quot;
+<pre><code class="language-powershell">winget install -e --name &quot;Python 3.10&quot;
 </code></pre>
 <p>Now my current Python remains the default and the new Python can be accessed explicitly. This is the
 behavior I wanted but honestly didn't expect.</p>
-<pre><code class="language-posh">PS C:\Users\scott&gt; python --version
+<pre><code class="language-text">PS C:\Users\scott&gt; python --version
 Python 3.8.10
 PS C:\Users\scott&gt; python3.10 --version
 Python 3.10.8
@@ -175,34 +181,7 @@ the paths that get set up and can be quite a headache.</p>
 
 </main>
 <footer>
-  <span>
-    <a href="mailto:swysocki@gmail.com">
-    <svg viewBox="0 0 8 6" height=24>
-      <path fill="#828282" d="m0 0h8v6h-8zm.75 .75v4.5h6.5v-4.5zM0 0l4 3 4-3v1l-4 3-4-3z"/>
-    </svg></a>
-  </span>
-  <span>
-    <a href="https://www.github.com/swysocki">
-      <svg viewBox="0 0 16 16" width=26 height=26>
-        <path fill="#828282" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
-        1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-        0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68
-        0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87
-        3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-      </svg></a>
-  </span>
-  <span>
-    <a href="https://www.linkedin.com/in/swysocki22">
-      <svg viewBox="0 0 512 512" width=26 height=26>
-        <path fill="#828282" d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683
-        C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z
-        M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615
-        c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915
-        s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z"/>
-      </svg></a>
-  </span>
-
+  <p>brought to you by<a href="/"> swysocki.com </a> &#x1F919;</p>
 </footer>
 </body>
 </html>
