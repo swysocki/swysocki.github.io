@@ -10,8 +10,8 @@ tags:
 This blog is hosted with [GitHub Pages](https://pages.github.com/) which is an excellent, free hosting service.
 Pages allow users to upload their sites as static resources.  This is most easily accomplished by using a
 Static Site Generator and as luck would have it, Pages works with [Jekyll](https://jekyllrb.com/) out of the box.
-This means all you have to do is create your Jekyll project, write some blogs post, and push the commit to GitHub.
-GitHub will generate and publish the website without any extra configuration, which is convenient but eventually, 
+This means all you have to do is create your Jekyll project, write some blog posts, and push the commit to GitHub.
+GitHub will generate and publish the website without any extra configuration, which is convenient but eventually,
 you will want to run your Jekyll site locally for development.
 
 ## Devcontainers or Bust
@@ -28,20 +28,20 @@ other projects I am working on don't interfere with it.
 This is where [devcontainers](containers.dev) shine. Devcontainers extend containers, like Docker, providing
 base templates and development features in an easy-to-use format.  One of the provided templates is a
 [Jekyll template](https://github.com/devcontainers/templates/tree/main/src/jekyll). This template won't work
-with GitHub Pages because it will use the latest Ruby version by default.  Instead, I need to use
+with GitHub Pages because it will use the latest Ruby version by default.  Instead, I needed to use
 Ruby 2.7 in the container but it wasn't obvious how to declare this variant.  I found the
 [list of Devcontainer Jekyll image tags](https://mcr.microsoft.com/v2/devcontainers/jekyll/tags/list)
 which allowed me to discover the `2.7-bullseye` tag.
 
-This tag can be dropped into the devcontainer JSON configuration to create a functioning Jekyll test environment
+This tag can be dropped into the container's JSON configuration to create a functioning Jekyll test environment
 with very little effort.  The following `devcontainer.json` file is all that is needed to set up a functional
 test environment.
 
 ```json
 {
-	"name": "Jekyll",
-	"image": "mcr.microsoft.com/devcontainers/jekyll:2.7-bullseye",
-	"features": {"ghcr.io/devcontainers/features/node": "1.2.0"}
-	// The devcontainer ships with a postCreate.sh that runs `bundle install`
+  "name": "Jekyll",
+  "image": "mcr.microsoft.com/devcontainers/jekyll:2.7-bullseye",
+  "features": {"ghcr.io/devcontainers/features/node": "1.2.0"}
+  // The devcontainer ships with a postCreate.sh that runs `bundle install`
 }
 ```

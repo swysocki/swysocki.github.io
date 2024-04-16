@@ -20,7 +20,7 @@ explicit versions.
 
 I'm going to pick on Docker image versioning and the `latest` tag here, but this
 issue also applies to systems such as `pip` that allow the user to omit explicit
-versions.  The Docker tag named `latest` is a reference that points to particular
+versions.  The Docker tag named `latest` is a reference that points to a particular
 Docker image. _Typically_ this will be the newest version of the image
 [but that is not enforced, it's convention](https://vsupalov.com/docker-latest-tag).
 
@@ -38,10 +38,8 @@ application is now a detriment.
 
 Let's rewind to the original, common cry from teams that are impacted by the
 "I didn't change anything, it just broke™" tyranny. I am sympathetic to this
-because things *did* just stop working, but obviously *something* changed.  Now
+because things _did_ just stop working, but obviously, _something_ changed.  Now
 the fun part begins: tracking down the actual issue.
-
-![obligatory meme](https://en.meming.world/images/en/4/4a/Modern_Problems_Require_Modern_Solutions.jpg)
 
 If you suspect a Docker image changed due to an update to the `latest`
 reference, you will need to find the output of the last successful launch of
@@ -57,26 +55,26 @@ working you understand exactly why unstable tags are evil.
 
 ## How Specific is Specific?
 
-In the case of Docker images, explicit versions can be a challenge.  I'm
-obviously advocating against using the `latest` tag, but then which tag should
+In the case of Docker images, explicit versions can be a challenge.  I'm advocating
+against using the `latest` tag, but then which tag should
 be used? Answering this takes some thought and inspection as image tags have no
 strict requirements. Let's use an example to demonstrate the process.
 
 Let's use a Linux distribution as an example.
 [Ubuntu's Docker image](https://hub.docker.com/_/ubuntu) is a perfect place to
-start. Ubuntu arranges their tags with a few levels of hierarchy.  At the top
+start. Ubuntu arranges its tags with a few levels of hierarchy.  At the top
 are `latest`, `rolling`, `devel`, etc.  These tags are convenient but not stable
 and will change frequently.  The next, more specific tag is the distro name,
-such as `focal` or number such as `21.04`.  This tag _may_ be more stable, but
-is still going to change as updates are rolled out. The most specific tag
+such as `focal` or number such as `21.04`.  This tag _may_ be more stable but is
+still going to change as updates are rolled out. The most specific tag
 offered by Ubuntu is a release with a distro name and timestamp, such as
 `focal-20210723`.  Using this tag will ensure the underlying Ubuntu system is stable
 until the tag is changed by the consumer.  This is the right amount of specificity
 for production systems.
 
-The point is, you will have to do a bit of detective work to find the stable tag
+The point is, that you will have to do a bit of detective work to find the stable tag
 to use in your application.  Do not assume that a tag like `21.04` will remain stable
-even though it *seems* specific.
+even though it _seems_ specific.
 
 ## This Seems Like a Lot of Work
 

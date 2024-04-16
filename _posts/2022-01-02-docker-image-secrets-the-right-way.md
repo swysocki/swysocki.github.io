@@ -38,11 +38,11 @@ Building this image requires the `--build-arg` to set the `MY_SECRET` variable. 
 example: `docker build . -t blogtest --build-arg MY_SECRET="abcdefg"`.  Now the
 image will use the value of `MY_SECRET` in the `curl` command.
 
-The issue here is, again, the `ARG` instruction was not meant to handle secrets and
-stores the variable in the Docker image's metadata. Viewing the Docker image's layer
-history revels the value of the `ARG` variable `MY_SECRET`.
+The issue here is, again, that the `ARG` instruction was not meant to handle secrets and
+store the variable in the Docker image's metadata. Viewing the Docker image's layer
+history reveals the value of the `ARG` variable `MY_SECRET`.
 
-```shell
+```text
 $ docker history blogtest
 IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
 d01dea2da844   17 minutes ago   RUN |1 MY_SECRET=abcdefg /bin/sh -c curl -u …   0B        buildkit.dockerfile.v0
@@ -52,11 +52,9 @@ d01dea2da844   17 minutes ago   RUN |1 MY_SECRET=abcdefg /bin/sh -c curl -u … 
 <missing>      6 weeks ago      /bin/sh -c #(nop) ADD file:df538113122843069…   5.33MB 
 ```
 
-## Buildkit to the Rescue
+## BuildKit to the Rescue
 
-![obligatory meme](https://i.imgflip.com/60mf8u.jpg)
-
-Previous versions of Docker had no straight-forward way of passing secrets when
+Previous versions of Docker had no straightforward way of passing secrets when
 building an image. It took great care and attention to detail to ensure that no
 sensitive data remained in the image. The arrival of
 [Docker Buildkit](https://blog.mobyproject.org/introducing-buildkit-17e056cc5317)
@@ -74,7 +72,7 @@ RUN --mount=type=secret,id=mysecret MY_SECRET=$(cat /run/secrets/mysecret ) \
   && curl -u "user:$MY_SECRET" https://ifconfig.me
 ```
 
-We no longer need the `ARG` instruction.  Instead we use the `--mount` argument
+We no longer need the `ARG` instruction.  Instead, we use the `--mount` argument
 with the `RUN` instruction.  This syntax mounts our secret to `/run/secrets/` in
 a file named after the `id` option, in this case: `mysecret`. The content of that
 file is then stored in our variable, `MY_SECRET`, so that we can use it in our `curl`
@@ -91,7 +89,7 @@ docker build . -t blogtest --secret id=mysecret,env=MY_SECRET
 
 Issuing the `docker history` command no longer reveals our secret.
 
-```dockerfile
+```text
 docker history blogtest
 IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
 ce5a8e6e0840   8 minutes ago   RUN /bin/sh -c MY_SECRET=$(cat /run/secrets/…   0B        buildkit.dockerfile.v0
@@ -123,6 +121,6 @@ the `src=<filename>` usage. But looking at the [source code](https://github.com/
 reveals that the `env=<variable name>` is also a possible option (as demonstrated
 in the above example).
 
-Buildkit's secret handling is great way to improve the security of your Docker images.
+Buildkit's secret handling is a great way to improve the security of your Docker images.
 Now is an excellent time to start adding it to your images. The feature will
-reduce the amount of leaked secrets and allow your ops teams to rest a bit easier.
+reduce the amount of leaked secrets and allow your ops teams to rest a bit more easily.

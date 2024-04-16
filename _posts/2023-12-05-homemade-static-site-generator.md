@@ -33,8 +33,9 @@ off-the-shelf libraries.
 
 ### Markdown to HTML Library
 
-There are lots, but I chose [markdown-it-py](https://github.com/executablebooks/markdown-it-py) which seems vastly underrated. It's a port of the
-[markdown-it](https://github.com/markdown-it/markdown-it) Javascript library, but doesn't
+There are lots, but I chose [markdown-it-py](https://github.com/executablebooks/markdown-it-py)
+which seems vastly underrated. It's a port of the
+[markdown-it](https://github.com/markdown-it/markdown-it) Javascript library but doesn't
 have quite as much traction.  Nonetheless, it has all the pieces I need.  The most
 notable feature is the plugin system. I use the Plugin Extensions to read Markdown
 [Front Matter](https://mdit-py-plugins.readthedocs.io/en/latest/#front-matter).

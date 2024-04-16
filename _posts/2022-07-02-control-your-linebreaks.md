@@ -17,9 +17,9 @@ I recently listened to the [Co-Recursive podcast](https://corecursive.com/)
 episode which gives a great background on the
 [80-column tradition](https://corecursive.com/why-80-columns/).
 Some of those details are interesting from a historical perspective but aren't
-the reason I choose a shorter line length over a long one. Punch cards column
-count is a fun bit of trivia and 
-[Chesterson's Fence](https://www.chesterton.org/taking-a-fence-down/)
+the reason I chose a shorter line length over a long one. Punch cards column
+count is a fun bit of trivia and
+[Chesterton's Fence](https://www.chesterton.org/taking-a-fence-down/)
 is an excellent concept to keep in mind, but neither is a good reason for short
 line lengths in the current world.
 
@@ -30,7 +30,7 @@ the ease of reading.  I am sure I am not alone in the fact that I tend to read
 more code than I write. Have you ever noticed how short newspaper and magazine
 lines are? They are short because studies have shown that
 [limiting line length](https://en.wikipedia.org/wiki/Line_length) aids in the
-legibility of media.  We aren't reading the newspaper but the I feel the same
+legibility of media.  We aren't reading the newspaper, but I feel the same
 concepts apply.  Allow me to demonstrate.
 
 Let's look at a long line that may exist in a Bash script:
@@ -98,10 +98,10 @@ introduced. When it is, the declaration loses its formatting and is much harder 
 
 I recommend agreeing on the line length as a project or team. Not everyone has the same
 editor configuration or monitor setup. Some developers enjoy working on smaller screens
-such as laptops while others use a single editor panel with no vertical splits. 
+such as laptops while others use a single editor panel with no vertical splits.
 
 Line length is part of the bigger picture, once a team agrees on an acceptable length
-they should 
+they should
 [adopt a code formatter](https://github.com/rishirdua/awesome-code-formatters).
 Every language has great code format utilities that work in concert with popular
 editors. Agree on your formatting configuration, including
