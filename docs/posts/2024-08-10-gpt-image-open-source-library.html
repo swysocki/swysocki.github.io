@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+  <title>My Blog::gpt-image, an Open Source Disk Partition Library</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <!-- stolen from http://evenbettermotherfucking.website -->
+  <style>
+      body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 800px;}
+      code {background: white;}
+      a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+      a:hover {border-bottom: 0;}
+      footer {font-size: 12px; } 
+  </style>
+</head>
+<body>
+<header>
+  <img src="/images/avatar.png" width="100" height="100">
+</header>
+<main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
+<article>
+<h2>gpt-image, an Open Source Disk Partition Library</h2>
+
+<p>I have been searching for something to write about for nearly a year, so I thought
+I would introduce a small, Open Source project I wrote. It's a Python project called
+<a href="https://github.com/swysocki/gpt-image"><code>gpt-image</code></a> that can create
+<a href="https://en.wikipedia.org/wiki/GUID_Partition_Table">GUID Partition Table</a>
+disk images <em>as a file within an existing filesystem</em>.  This is in contrast to many GPT
+libraries that operate on an underlying device or loopback device. The inspiration for
+this library comes from the need to create firmware disk images in GPT form. I needed
+something light, flexible, and preferably, cross-platform.</p>
+<h2>High-Level GPT Details</h2>
+<p>You are likely familiar with the GPT specification if you have formatted disks or created
+Raspberry Pi disk images. It is a well-established standard, used by many (maybe most)
+operating systems. It is the successor to the Master Boot Record (MBR) standard and allows
+for much more complex partitioning of a disk.</p>
+<p>The majority of the GPT specification details the header and table structures. These structures
+contain all of the partition information for the disk. They are duplicated, one at the start
+of the disk image and one, that acts as a backup, at the end of the disk. Consumers of GPT disks
+load those structures, providing a mapping of the start block, end block, ID and a host of other
+information about a partition. It is a relatively simple structure and a great place to
+practice building a software utility to a given specification.</p>
+<p>My GPT implementation does not try to replace other libraries like <a href="https://www.gnu.org/software/parted/"><code>libparted</code></a>.
+It is focused on creating small disk images, something that can fit into the host's memory. If a very large
+image is needed, <code>parted</code> is likely a better choice.  If you are making device images for
+embedded devices like Raspberry Pi, STM32, etc., you may find that <code>gpt-image</code> is a good choice.</p>
+<p>The library itself is simple. It uses only the Python standard library and is written in pure
+Python to avoid any compilation steps. This keeps the library portable and should be usable on
+any operating system where Python exists.</p>
+<h2>Contributions</h2>
+<p>I recently received my <a href="https://github.com/swysocki/gpt-image/pull/54">first contribution</a> which was very flattering and added the
+ability to edit partitions. I welcome all PRs that add stable, meaningful features to
+the library and I encourage anyone who finds a bug to open an issue. You will get prompt feedback.
+This library gets used hundreds of times a day at my day job with <a href="https://www.amperecomputing.com">Ampere</a>
+and has been incredibly stable. That means the release cadence of <code>gpt-image</code> is relatively
+slow, which can be beneficial if managing dependencies is part of your job description. On the
+flip side, it may look like the project is unmaintained, and I assure you it's not! It's a
+critical part of our workflow and will continue to receive attention as needed.</p>
+<h2>Feedback</h2>
+<p>I appreciate your feedback on the project. It is my first effort to provide an Open Source alternative
+to an existing utility.  If you find it useful I would love to hear about it! Stop by the Github
+project, leave a star, open an issue or submit a Pull Request.</p>
+
+</article> 
+
+</main>
+<footer>
+  <p>brought to you by<a href="/"> swysocki.com </a> &#x1F919;</p>
+</footer>
+</body>
+</html>
