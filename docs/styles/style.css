@@ -28,6 +28,7 @@ footer {
     font-size: 12px;
 }
 
+/* tablet-ish size */
 @media only screen and (min-width: 421px) {
     body {
         font-size: 18px;
@@ -35,6 +36,7 @@ footer {
     }
 }
 
+/* desktop size */
 @media only screen and (min-width: 768px) {
     body {
         font-size: 16px;
