@@ -14,7 +14,8 @@ header {
   display: flex;
   justify-content: space-between; /* avatar left, nav group right */
   align-items: center;
-  padding: 0;
+  padding: 0 0 0.75rem 0; /* space below header */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* subtle bottom border */
 }
 
 /* The nav holds Home, Workshop, and the GitHub icon */
