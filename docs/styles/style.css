@@ -10,14 +10,48 @@ body {
     width: 380px;
 }
 
+header {
+  display: flex;
+  justify-content: space-between; /* avatar left, nav group right */
+  align-items: center;
+  padding: 0;
+}
+
+/* The nav holds Home, Workshop, and the GitHub icon */
+header nav {
+  display: flex;
+  gap: 1.5rem;              /* even spacing between items */
+  align-items: center;      /* vertically align text and svg */
+}
+
+/* Links and the GitHub anchor */
+header nav a {
+  text-decoration: none;    /* no underline by default */
+  color: inherit;           /* inherit text color from header/theme */
+  font-weight: 500;
+  display: flex;
+  align-items: center;      /* keeps text and svg aligned */
+}
+
+/* Hover effect */
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Avatar image */
+header img {
+  display: block;           /* removes inline spacing quirks */
+  border-radius: 50%;       /* optional: makes avatar circular */
+}
+
 code {
     background: white;
 }
 
 a {
-    border-bottom: 1px solid #444444;
+    /* border-bottom: 1px solid #444444; */
     color: #444444;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
