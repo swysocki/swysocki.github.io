@@ -59,6 +59,12 @@ a:hover {
     border-bottom: 0;
 }
 
+time {
+    color: #444444;
+    font-size: .8em;
+    padding: 0 .1em 0 .1em;
+}
+
 footer {
     font-size: 12px;
 }
