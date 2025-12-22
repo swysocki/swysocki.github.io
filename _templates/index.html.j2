@@ -6,7 +6,7 @@
 {% for post in post_list %}
     <li>
         <a class="articlelist" href="{{ post.post_link }}">{{ post.post_title }}</a>
-        <time datetime="{{ post.date_iso }}">{{ post.date }}</time>
+        <time datetime="{{ post.date }}">{{ post.date }}</time>
     </li>
 {% endfor %}
 </ul>
