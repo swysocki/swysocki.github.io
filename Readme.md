@@ -1,1 +1,1 @@
-[https://www.swysocki.com](https://www.sysocki.com)  &#x1F919;
+[https://www.swysocki.com](https://www.swysocki.com)  &#x1F919;
