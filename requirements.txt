@@ -1,7 +1,1 @@
-Jinja2==3.1.4
-linkify-it-py==2.0.2
-markdown-it-py==3.0.0
-MarkupSafe==2.1.3
-mdit-py-plugins==0.4.0
-mdurl==0.1.2
-PyYAML==6.0
+staffsergeant @ git+https://github.com/swysocki/staffsergeant@v0.0.1
