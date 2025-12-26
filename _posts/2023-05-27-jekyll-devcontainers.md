@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Run Jekyll From a Devcontainer
+slug: 2023-05-27-jekyll-devcontainers
 tags:
     - programming
     - automation

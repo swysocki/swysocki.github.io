@@ -1,11 +1,9 @@
 ---
 layout: post
 title: The Tyranny of Latest
+slug: 2021-08-26-the-tyranny-of-latest
 tags:
-  - devops
-  - docker
-  - containers
-  - sre
+    - meta
 ---
 We've been bitten by this over and over.  Something that worked yesterday
 no longer works today.  You hear the cries, "I didn't change anything,

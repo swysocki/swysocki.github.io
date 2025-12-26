@@ -1,6 +1,7 @@
 ---
 layout: post
 title: I Wrote a Static Site Generator
+slug: 2023-12-05-homemade-static-site-generator
 tags:
     - programming
     - automation

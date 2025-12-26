@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Is Devops Engineer a Title?
+title: Is Devops Engineer a Title
+slug: 2021-04-10-is-devops-engineer-a-title
 tags:
   - devops
   - career

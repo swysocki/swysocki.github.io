@@ -1,6 +1,7 @@
 ---
 layout: post
 title: gpt-image, an Open Source Disk Partition Library
+slug: 2024-08-10-gpt-image-open-source-library
 tags:
     - programming
     - python

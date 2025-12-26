@@ -1,6 +1,7 @@
 ---
 layout: project
 title: Projects
+slug: projects
 tags:
   - software
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Line Length Still Matters
+slug: 2022-07-02-control-your-linebreaks
 tags:
   - devops
   - software engineering

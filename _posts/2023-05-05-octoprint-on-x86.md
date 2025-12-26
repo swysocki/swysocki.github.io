@@ -1,6 +1,7 @@
 ---
 layout: post
 title: OctoPrint on x86
+slug: 2023-05-05-octoprint-on-x86
 tags:
   - 3dprinting
   - automation

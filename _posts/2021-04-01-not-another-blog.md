@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Not Another Blog
+slug: 2021-04-01-not-another-blog
 tags:
   - blog
 ---
