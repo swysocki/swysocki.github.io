@@ -1,0 +1,28 @@
+{
+  "name": "swysocki.github.io",
+  "version": "1.0.0",
+  "description": "[https://www.swysocki.com](https://www.swysocki.com)  &#x1F919;",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swysocki/swysocki.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swysocki/swysocki.github.io/issues"
+  },
+  "homepage": "https://github.com/swysocki/swysocki.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "luxon": "^3.7.2",
+    "markdown-it": "^14.1.0"
+  }
+}

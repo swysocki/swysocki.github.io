@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  {% block title %}<title>{{ page_title }}</title>{% endblock %}
+  {% block title %}<title>{{ title or "swysocki.com" }}</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
@@ -12,7 +12,7 @@
   <img src="/static/avatar.png" width="100" height="100" title="avatar">
   <nav>
     <a href="/">Home</a>
-    <a href="/projects.html">Projects</a>
+    <a href="/projects/">Projects</a>
     <a href="https://github.com/swysocki" target="_blank" rel="noopener noreferrer">
       <svg
         xmlns="http://www.w3.org/2000/svg"

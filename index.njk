@@ -1,0 +1,16 @@
+---
+permalink: /index.html
+---
+{% extends "base.njk" %}
+
+{% block content %}
+<h1>Articles</h1>
+<ul>
+{% for post in collections.posts %}
+    <li>
+        <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
+        <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
