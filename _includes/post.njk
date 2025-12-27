@@ -1,10 +1,10 @@
-{% extends "base.html.j2" %}
+{% extends "base.njk" %}
 
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/components/prism-core.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
 <article>
-<h2>{{ post_title }}</h2>
-{{ body_content }}
+<h2>{{ title }}</h2>
+{{ content | safe }}
 </article> 
 {% endblock %}

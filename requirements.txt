@@ -1,1 +1,0 @@
-staffsergeant @ git+https://github.com/swysocki/staffsergeant@v0.0.1
