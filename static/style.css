@@ -1,13 +1,16 @@
 /* Stolen from http://evenbettermotherfucking.website */
 body {
     margin: 5% auto;
+    padding: 1rem;           /* horizontal padding on all sides */
     background: #f2f2f2;
     color: #444444;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.8;
     text-shadow: 0 1px 0 #ffffff;
-    width: 380px;
+    width: 100%;             /* use full width on mobile */
+    max-width: 380px;        /* max width for mobile */
+    box-sizing: border-box;  /* include padding in width calculation */
 }
 
 header {
@@ -16,6 +19,30 @@ header {
   align-items: center;
   padding: 0 0 0.75rem 0; /* space below header */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* subtle bottom border */
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* Hide the checkbox input */
+.nav-toggle {
+  display: none;
+}
+
+/* Hamburger menu button - only visible on mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 100;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #444444;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 /* The nav holds Home, Workshop, and the GitHub icon */
@@ -69,11 +96,73 @@ footer {
     font-size: 12px;
 }
 
+/* Mobile-first: show hamburger menu on small screens */
+@media only screen and (max-width: 420px) {
+    body {
+        padding: 0.75rem;    /* tighter padding on very small screens */
+    }
+
+    header {
+        gap: 1rem;
+    }
+
+    header img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Show hamburger button on mobile */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide nav by default on mobile */
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f2f2f2;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    /* Show nav when checkbox is checked */
+    .nav-toggle:checked ~ nav {
+        max-height: 500px;
+    }
+
+    /* Animate hamburger lines when menu is open */
+    .nav-toggle:checked ~ .hamburger span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .nav-toggle:checked ~ .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle:checked ~ .hamburger span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Make nav links block-level on mobile */
+    header nav a {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+}
+
 /* tablet-ish size */
 @media only screen and (min-width: 421px) {
     body {
         font-size: 18px;
-        width: 600px;
+        max-width: 600px;
+        padding: 1rem;
     }
 }
 
@@ -81,6 +170,7 @@ footer {
 @media only screen and (min-width: 768px) {
     body {
         font-size: 16px;
-        width: 800px;
+        max-width: 800px;
+        padding: 1rem;
     }
 }
