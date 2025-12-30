@@ -14,8 +14,6 @@ These printers are inexpensive, insanely modifiable, and have a ton of community
 I have been happy with my choice but there is one thing that I have always disliked about
 it: the SD Card shuffle.
 
-![OctoPrint and x86](/assets/images/blog_octo_x86.png)
-
 ## Enter OctoPrint
 
 Most budget printers do not have network connectivity.  The main mechanism used to transfer
