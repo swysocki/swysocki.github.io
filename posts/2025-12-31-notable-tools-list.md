@@ -49,7 +49,7 @@ using a pencil, while I'm in the workshop.
 ### Drawbacks
 
 I occasionally do sheet metal work and Shapr3D does not have any sheet metal
-tools. Other CAD programs will calculate R-factors, bends and flat patterns which
+tools. Other CAD programs will calculate K-factors, bends and flat patterns which
 is a massive time saver.
 
 ## Bambu Lab X1 Carbon
