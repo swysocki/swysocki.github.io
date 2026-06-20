@@ -4,13 +4,46 @@ permalink: /index.html
 {% extends "base.njk" %}
 
 {% block content %}
-<h1>Notes</h1>
-<ul>
-{% for post in collections.posts %}
-    <li>
+<div class="intro">
+  <h1 class="intro-title">Hi, I'm Scott.</h1>
+  <p class="intro-bio">I'm a software engineer, fabricator, and tinker specializing in infrastructure, automation and sarcasm. This site houses my technical notes, projects and progress in the workshop.</p>
+</div>
+
+<section class="featured-projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="project-grid">
+    <div class="project-card">
+      <h3 class="project-title"><a href="https://github.com/swysocki/staffsergeant">Staff Sergeant</a></h3>
+      <p class="project-description">A simple, config-free Python static site generator built as a personal replacement for to Jekyll.</p>
+    </div>
+    <div class="project-card">
+      <h3 class="project-title"><a href="https://github.com/swysocki/classicscores">Classic Scores</a></h3>
+      <p class="project-description">A structured archive of paintball tournament scores from the 1980s through 2000s, preserved in JSON.</p>
+    </div>
+    <div class="project-card">
+      <h3 class="project-title"><a href="https://github.com/swysocki/gpt-image">GPT Image</a></h3>
+      <p class="project-description">A Python library for partitioning filesystems into GUID Partition Table (GPT) disk images without mounting.</p>
+    </div>
+  </div>
+</section>
+
+<section class="notes-section">
+  <h2 class="section-title">Notes</h2>
+  <div class="posts-list">
+    {% set currentYear = "" %}
+    {% for post in collections.posts %}
+      {% set postYear = post.date | readableDate("yyyy") %}
+      {% if postYear != currentYear %}
+        {% set currentYear = postYear %}
+        <div class="year-group">
+          <h3 class="year-title">{{ currentYear }}</h3>
+        </div>
+      {% endif %}
+      <div class="post-item">
+        <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
         <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
-        <time datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    </li>
-{% endfor %}
-</ul>
+      </div>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

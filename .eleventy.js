@@ -3,6 +3,7 @@ const { DateTime } = require("luxon");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("static");
   eleventyConfig.addPassthroughCopy("CNAME");
+  eleventyConfig.addPassthroughCopy("images");
 
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("posts/*.md").sort(function(a, b) {
