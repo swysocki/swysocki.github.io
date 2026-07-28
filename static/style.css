@@ -104,29 +104,30 @@ header {
   position: relative;
 }
 
-/* Monospace font-based logo placeholder */
-.logo-text {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text-primary);
+/* Logo: single masked asset recolored per theme */
+.logo {
+  display: block;
+  width: 168px;      /* ~3.5:1 script aspect ratio */
+  height: 48px;
   border-bottom: none;
-  letter-spacing: -0.03em;
-  transition: color 0.2s ease;
+  background-color: var(--text-primary);
+  -webkit-mask: url("/static/logo-mask.png") left center / contain no-repeat;
+  mask: url("/static/logo-mask.png") left center / contain no-repeat;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.logo-text:hover {
-  color: var(--accent);
+.logo:hover {
+  background-color: var(--accent);
+  transform: rotate(-1.5deg);
   border-bottom: none;
 }
 
 /* Nav styles */
 header nav {
   display: flex;
-  gap: 24px;
+  gap: 8px;
   align-items: center;
-  margin-right: auto;
-  margin-left: 32px;
+  margin-left: auto;
 }
 
 header nav a {
@@ -136,20 +137,15 @@ header nav a {
   font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
+  padding: 6px 16px;
+  border-radius: 8px;
   border-bottom: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 header nav a:hover {
   color: var(--text-primary);
-}
-
-header nav a svg {
-  margin-left: 2px;
-  transition: transform 0.2s ease;
-}
-
-header nav a:hover svg {
-  transform: scale(1.1) translateY(-1px);
+  background-color: var(--bg-secondary);
 }
 
 /* Hamburger toggle (hidden on desktop, revealed in mobile query) */
@@ -170,46 +166,6 @@ header nav a:hover svg {
   background-color: var(--text-primary);
   border-radius: 2px;
   transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-/* Header Right Status Indicator */
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-.status-indicator {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--bg-secondary);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-}
-
-.status-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #10b981; /* Active green */
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 6px #10b981;
-  animation: statusPulse 2s infinite ease-in-out;
-}
-
-@keyframes statusPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(0.9);
-  }
 }
 
 /* Intro Section */
@@ -570,6 +526,7 @@ footer a:hover {
   /* Mobile Nav checkbox hack refinement */
   .hamburger {
     display: flex;
+    margin-left: auto;
   }
 
   header nav {
@@ -609,7 +566,8 @@ footer a:hover {
 
   header nav a {
     width: 100%;
-    padding: 8px 0;
+    padding: 10px 16px;
+    border-radius: 0;
     font-size: 1rem;
   }
   
