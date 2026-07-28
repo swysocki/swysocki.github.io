@@ -1,0 +1,35 @@
+---
+permalink: /workshop/index.html
+title: Workshop
+---
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="intro">
+  <h1 class="intro-title">Workshop</h1>
+  <p class="intro-bio">Notes and progress from my fabrication, automotive, and workshop projects.</p>
+</div>
+
+<section class="notes-section">
+  <h2 class="section-title">Builds</h2>
+  <div class="posts-list">
+    {% set currentYear = "" %}
+    {% for post in collections.workshop %}
+      {% set postYear = post.date | readableDate("yyyy") %}
+      {% if postYear != currentYear %}
+        {% set currentYear = postYear %}
+        <div class="year-group">
+          <h3 class="year-title">{{ currentYear }}</h3>
+        </div>
+      {% endif %}
+      <div class="post-item">
+        <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
+        <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
+        <span class="tag tag-workshop">workshop</span>
+      </div>
+    {% else %}
+      <p class="intro-bio">No workshop builds yet. Check back soon.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -11,6 +11,16 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("workshop", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("posts/*.md")
+      .filter(function(post) {
+        return post.data.category === "workshop";
+      })
+      .sort(function(a, b) {
+        return b.date - a.date;
+      });
+  });
+
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "yyyy-LL-dd");
