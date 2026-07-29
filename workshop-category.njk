@@ -1,0 +1,52 @@
+---
+pagination:
+  data: categories
+  size: 1
+  alias: cat
+categories:
+  - slug: e30
+    title: e30
+  - slug: fabrication
+    title: Fabrication
+  - slug: home
+    title: Home
+permalink: /workshop/{{ cat.slug }}/index.html
+eleventyComputed:
+  title: "Workshop · {{ cat.title }}"
+---
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="intro">
+  <h1 class="intro-title">{{ cat.title }}</h1>
+  <p class="intro-bio"><a href="/workshop/">&#8592; All builds</a></p>
+</div>
+
+<section class="notes-section">
+  <div class="posts-list">
+    {% set matches = [] %}
+    {% for post in collections.workshop %}
+      {% if cat.slug in (post.data.tags or []) %}
+        {% set matches = (matches.push(post), matches) %}
+      {% endif %}
+    {% endfor %}
+    {% set currentYear = "" %}
+    {% for post in matches %}
+      {% set postYear = post.date | readableDate("yyyy") %}
+      {% if postYear != currentYear %}
+        {% set currentYear = postYear %}
+        <div class="year-group">
+          <h3 class="year-title">{{ currentYear }}</h3>
+        </div>
+      {% endif %}
+      <div class="post-item">
+        <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
+        <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
+        <span class="tag tag-workshop">{{ cat.title }}</span>
+      </div>
+    {% else %}
+      <p class="intro-bio">No {{ cat.title }} builds yet. Check back soon.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

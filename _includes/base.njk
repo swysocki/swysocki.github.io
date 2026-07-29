@@ -8,8 +8,14 @@
   <link rel="stylesheet" href="/static/style.css" content-type="text/css">
 </head>
 <body>
-<header>
+{% set isWorkshop = (page.url and page.url.startsWith("/workshop/")) or (category == "workshop") %}
+{% if isWorkshop %}
+<header class="workshop-header">
   <a href="/" class="logo" aria-label="swysocki.com home"></a>
+</header>
+{% else %}
+<header>
+  <a href="/" class="logo-text">$ cat swysocki.com</a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
   <label for="nav-toggle" class="hamburger" aria-label="Toggle navigation">
     <span></span><span></span><span></span>
@@ -18,7 +24,11 @@
     <a href="/">notes</a>
     <a href="/workshop/">workshop</a>
   </nav>
+  <div class="header-right">
+    <span class="status-indicator"><span class="status-dot"></span>sys: active</span>
+  </div>
 </header>
+{% endif %}
 <main>
 {% block content %}
 {% endblock %}
