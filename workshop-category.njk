@@ -10,16 +10,16 @@ categories:
     title: Fabrication
   - slug: home
     title: Home
-permalink: /workshop/{{ cat.slug }}/index.html
+permalink: /{{ cat.slug }}/index.html
 eleventyComputed:
-  title: "Workshop · {{ cat.title }}"
+  title: "{{ cat.title }} · swysocki.com"
 ---
 {% extends "base.njk" %}
 
 {% block content %}
 <div class="intro">
   <h1 class="intro-title">{{ cat.title }}</h1>
-  <p class="intro-bio"><a href="/workshop/">&#8592; All builds</a></p>
+  <p class="intro-bio"><a href="/">&#8592; All builds</a></p>
 </div>
 
 <section class="notes-section">

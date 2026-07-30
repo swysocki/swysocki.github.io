@@ -1,37 +1,32 @@
 ---
 permalink: /index.html
+title: swysocki.com
 ---
 {% extends "base.njk" %}
 
 {% block content %}
-<div class="intro">
-  <h1 class="intro-title">Hi, I'm Scott.</h1>
-  <p class="intro-bio">I'm a software engineer, fabricator, and tinkerer specializing in infrastructure, automation and sarcasm. This site houses my technical notes, projects and progress in the workshop.</p>
-</div>
-
 <section class="featured-projects">
-  <h2 class="section-title">Projects</h2>
   <div class="project-grid">
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/staffsergeant">Staff Sergeant</a></h3>
-      <p class="project-description">A simple, config-free Python static site generator built as a personal replacement to Jekyll.</p>
+      <h3 class="project-title"><a href="/e30/">e30</a></h3>
+      <p class="project-description">The ongoing revival of a BMW e30. Suspension, engine, and interior work documented one weekend at a time.</p>
     </div>
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/classicscores">Classic Scores</a></h3>
-      <p class="project-description">A structured archive of paintball tournament scores from the 1980s through 2000s, preserved in JSON.</p>
+      <h3 class="project-title"><a href="/fabrication/">Fabrication</a></h3>
+      <p class="project-description">Welding, metalwork, and shop tooling. Brackets, jigs, and the occasional over-engineered fix.</p>
     </div>
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/gpt-image">GPT Image</a></h3>
-      <p class="project-description">A Python library for partitioning filesystems into GUID Partition Table (GPT) disk images without mounting.</p>
+      <h3 class="project-title"><a href="/home/">Home</a></h3>
+      <p class="project-description">House projects and repairs. Practical improvements, from the mundane to the mildly ambitious.</p>
     </div>
   </div>
 </section>
 
 <section class="notes-section">
-  <h2 class="section-title">Notes</h2>
+  <h2 class="section-title">Builds</h2>
   <div class="posts-list">
     {% set currentYear = "" %}
-    {% for post in collections.posts %}
+    {% for post in collections.workshop %}
       {% set postYear = post.date | readableDate("yyyy") %}
       {% if postYear != currentYear %}
         {% set currentYear = postYear %}
@@ -39,12 +34,21 @@ permalink: /index.html
           <h3 class="year-title">{{ currentYear }}</h3>
         </div>
       {% endif %}
-      {% set cat = post.data.category or "tech" %}
       <div class="post-item">
         <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
         <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
-        <span class="tag tag-{{ cat }}">{{ cat }}</span>
+        <div class="tag-list">
+          {% if post.data.tags %}
+            {% for tag in post.data.tags %}
+              <span class="tag tag-{{ tag | slugify }}">{{ tag }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="tag tag-workshop">workshop</span>
+          {% endif %}
+        </div>
       </div>
+    {% else %}
+      <p class="intro-bio">No builds yet. Check back soon.</p>
     {% endfor %}
   </div>
 </section>

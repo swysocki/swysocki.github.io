@@ -93,106 +93,19 @@ a:hover {
   border-bottom-color: var(--accent-hover);
 }
 
-/* Header styling */
+/* Header: centered masked logo recolored per theme */
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 0 24px 0;
+  padding: 16px 0 32px 0;
   margin-bottom: 48px;
   border-bottom: 1px solid var(--border-color);
-  position: relative;
 }
 
-/* Default logo: monospace terminal-style text */
-.logo-text {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text-primary);
-  border-bottom: none;
-  letter-spacing: -0.03em;
-  transition: color 0.2s ease;
-}
-
-.logo-text:hover {
-  color: var(--accent);
-  border-bottom: none;
-}
-
-/* Default nav styles */
-header nav {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin-right: auto;
-  margin-left: 32px;
-}
-
-header nav a {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  border-bottom: none;
-  transition: color 0.15s ease;
-}
-
-header nav a:hover {
-  color: var(--text-primary);
-}
-
-/* Default header status indicator */
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-.status-indicator {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: var(--bg-secondary);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color);
-}
-
-.status-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #10b981; /* Active green */
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 6px #10b981;
-  animation: statusPulse 2s infinite ease-in-out;
-}
-
-@keyframes statusPulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(0.9);
-  }
-}
-
-/* Workshop header: centered, enlarged masked logo recolored per theme */
-.workshop-header {
-  justify-content: center;
-  padding: 16px 0 32px 0;
-}
-
-.workshop-header .logo {
+.logo {
   display: block;
-  width: 336px;      /* ~3.5:1 script aspect ratio, enlarged */
+  width: 336px;
   max-width: 80vw;
   height: 96px;
   border-bottom: none;
@@ -202,30 +115,10 @@ header nav a:hover {
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.workshop-header .logo:hover {
+.logo:hover {
   background-color: var(--accent);
   transform: rotate(-1.5deg);
   border-bottom: none;
-}
-
-/* Hamburger toggle (hidden on desktop, revealed in mobile query) */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--text-primary);
-  border-radius: 2px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 /* Intro Section */
@@ -623,58 +516,9 @@ footer a:hover {
   }
 
   header {
-    gap: 16px;
     margin-bottom: 32px;
   }
 
-  /* Mobile Nav checkbox hack refinement */
-  .hamburger {
-    display: flex;
-    margin-left: auto;
-  }
-
-  header nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    gap: 12px;
-    padding: 0;
-    background: var(--bg-primary);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.25s ease-out, padding 0.25s ease-out;
-    z-index: 100;
-    border-bottom: none;
-  }
-
-  .nav-toggle:checked ~ nav {
-    max-height: 200px;
-    padding: 16px 0 8px 0;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  /* Hamburger lines animation when toggle checked */
-  .nav-toggle:checked ~ .hamburger span:nth-child(1) {
-    transform: rotate(45deg) translate(4px, 4px);
-  }
-
-  .nav-toggle:checked ~ .hamburger span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav-toggle:checked ~ .hamburger span:nth-child(3) {
-    transform: rotate(-45deg) translate(4px, -4px);
-  }
-
-  header nav a {
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 0;
-    font-size: 1rem;
-  }
-  
   .project-grid {
     grid-template-columns: 1fr;
   }

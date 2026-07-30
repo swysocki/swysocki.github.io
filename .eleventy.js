@@ -48,12 +48,6 @@ module.exports = function(eleventyConfig) {
     return `<div class="post-gallery">${items.join("\n")}</div>`;
   });
 
-  eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("posts/*.md").sort(function(a, b) {
-      return b.date - a.date;
-    });
-  });
-
   eleventyConfig.addCollection("workshop", function(collectionApi) {
     return collectionApi.getFilteredByGlob("posts/*.md")
       .filter(function(post) {
