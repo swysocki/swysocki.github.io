@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="/static/glightbox/glightbox.min.css">
   <link rel="stylesheet" href="/static/style.css" content-type="text/css">
 </head>
 <body>
@@ -36,5 +37,13 @@
 <footer>
   <p>brought to you by<a href="/"> swysocki.com </a> &#x1F919;</p>
 </footer>
+<script src="/static/glightbox/glightbox.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector(".glightbox")) {
+      GLightbox({ selector: ".glightbox" });
+    }
+  });
+</script>
 </body>
 </html>

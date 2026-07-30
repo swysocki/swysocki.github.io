@@ -37,7 +37,15 @@ title: Workshop
       <div class="post-item">
         <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
         <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
-        <span class="tag tag-workshop">workshop</span>
+        <div class="tag-list">
+          {% if post.data.tags %}
+            {% for tag in post.data.tags %}
+              <span class="tag tag-{{ tag | slugify }}">{{ tag }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="tag tag-workshop">workshop</span>
+          {% endif %}
+        </div>
       </div>
     {% else %}
       <p class="intro-bio">No workshop builds yet. Check back soon.</p>
