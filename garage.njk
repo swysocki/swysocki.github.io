@@ -1,28 +1,20 @@
 ---
-permalink: /index.html
-title: swysocki.com
+permalink: /garage/index.html
+title: Garage
 ---
 {% extends "base.njk" %}
 
 {% block content %}
-<section class="featured-projects">
-  <div class="project-grid">
-    <div class="project-card">
-      <h3 class="project-title"><a href="/garage/">Garage</a></h3>
-      <p class="project-description">Automotive modifications, repairs, and upgrades documented one weekend at a time.</p>
-    </div>
-    <div class="project-card">
-      <h3 class="project-title"><a href="/fabrication/">Fabrication</a></h3>
-      <p class="project-description">Welding, metalwork, and shop tooling. Brackets, jigs, and the occasional over-engineered fix.</p>
-    </div>
-  </div>
-</section>
+<div class="intro">
+  <h1 class="intro-title">Garage</h1>
+  <p class="intro-bio">Automotive modifications, repairs, and upgrades documented one weekend at a time.</p>
+</div>
 
 <section class="notes-section">
   <h2 class="section-title">Builds</h2>
   <div class="posts-list">
     {% set currentYear = "" %}
-    {% for post in collections.categorized %}
+    {% for post in collections.garage %}
       {% set postYear = post.date | readableDate("yyyy") %}
       {% if postYear != currentYear %}
         {% set currentYear = postYear %}
@@ -34,7 +26,6 @@ title: swysocki.com
         <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
         <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
         <div class="tag-list">
-          <span class="tag tag-category">{{ post.data.category }}</span>
           {% for tag in post.data.tags %}
             <span class="tag tag-{{ tag | slugify }}">{{ tag }}</span>
           {% endfor %}

@@ -2,10 +2,10 @@
 layout: post
 title: Porch Handrails
 slug: 2025-11-07-porch-handrails
-category: workshop
+category: fabrication
 tags:
-  - fabrication
-  - home
+  - residential
+  - railings
 ---
 
 Handrails are a great way to update the look of a front porch, replacing the traditional balusters with custom metalwork is a huge improvement. I used CAD to design and render a simple, but fashionable, set of handrails for our front porch. Although the design is simple, the execution is a trickier than I expected. Combatting the weld distortion is tricky, alignment of all the pieces takes some thought, and I've never wanted a fixture table more in my life! 

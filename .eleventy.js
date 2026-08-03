@@ -48,14 +48,31 @@ module.exports = function(eleventyConfig) {
     return `<div class="post-gallery">${items.join("\n")}</div>`;
   });
 
-  eleventyConfig.addCollection("workshop", function(collectionApi) {
+  function byCategory(collectionApi, category) {
     return collectionApi.getFilteredByGlob("posts/*.md")
       .filter(function(post) {
-        return post.data.category === "workshop";
+        return post.data.category === category;
       })
       .sort(function(a, b) {
         return b.date - a.date;
       });
+  }
+
+  // Combined feed for the main page: only garage + fabrication posts.
+  eleventyConfig.addCollection("categorized", function(collectionApi) {
+    return byCategory(collectionApi, "garage")
+      .concat(byCategory(collectionApi, "fabrication"))
+      .sort(function(a, b) {
+        return b.date - a.date;
+      });
+  });
+
+  eleventyConfig.addCollection("garage", function(collectionApi) {
+    return byCategory(collectionApi, "garage");
+  });
+
+  eleventyConfig.addCollection("fabrication", function(collectionApi) {
+    return byCategory(collectionApi, "fabrication");
   });
 
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {

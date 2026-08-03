@@ -2,10 +2,10 @@
 layout: post
 title: Door Check Repair
 slug: 2024-05-02-door-repair
-category: workshop
+category: garage
 tags:
   - e30
-  - fabrication
+  - autobody
 ---
 
 Used cars are like a box of chocolates. The driver's door of my car lacked a check mechanism. The door check is a device with detents that holds the door open. The previous owner of my E30 had somehow torn the mechanism from the door itself. This led to a couple of problems:
