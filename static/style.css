@@ -169,11 +169,13 @@ header {
   padding: 20px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
+  border-top: 4px solid var(--accent);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .project-card:hover {
   border-color: var(--accent);
+  border-top-color: var(--accent);
   transform: translateY(-2px);
 }
 
