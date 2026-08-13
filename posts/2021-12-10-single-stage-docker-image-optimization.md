@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: Single Stage Docker Image Optimizations
 slug: single-stage-docker-image-optimizations
 tags:

@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: Discovering LLM Skills
 slug: 2026-06-20-discovering-llm-skills
 tags:

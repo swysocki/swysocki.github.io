@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: Windows Native Python Development Setup
 slug: 2022-10-30-windows-native-python-development-setup
 tags:

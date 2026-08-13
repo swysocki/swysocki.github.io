@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: It's Good to be Back
 tags:
     - meta

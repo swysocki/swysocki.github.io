@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: Docker Image Secrets the Right Way
 slug: 2022-01-02-docker-image-secrets-the-right-way
 tags:
