@@ -2,7 +2,7 @@
 layout: post
 title: E30 Engine Swap
 slug: 2022-09-04-engine-swap
-category: tech
+category: automotive
 tags:
   - e30
 ---

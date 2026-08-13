@@ -12,16 +12,16 @@ permalink: /index.html
   <h2 class="section-title">Projects</h2>
   <div class="project-grid">
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/staffsergeant">Staff Sergeant</a></h3>
-      <p class="project-description">A simple, config-free Python static site generator built as a personal replacement to Jekyll.</p>
+      <h3 class="project-title">Tech</h3>
+      <p class="project-description">Software, tools, and engineering notes documenting what I build and learn.</p>
     </div>
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/classicscores">Classic Scores</a></h3>
-      <p class="project-description">A structured archive of paintball tournament scores from the 1980s through 2000s, preserved in JSON.</p>
+      <h3 class="project-title">Automotive</h3>
+      <p class="project-description">Repairs, restorations, and modifications on project cars, one weekend at a time.</p>
     </div>
     <div class="project-card">
-      <h3 class="project-title"><a href="https://github.com/swysocki/gpt-image">GPT Image</a></h3>
-      <p class="project-description">A Python library for partitioning filesystems into GUID Partition Table (GPT) disk images without mounting.</p>
+      <h3 class="project-title">Fabrication</h3>
+      <p class="project-description">Welding, metalwork, and shop tooling from the workshop.</p>
     </div>
   </div>
 </section>
@@ -41,6 +41,7 @@ permalink: /index.html
       <div class="post-item">
         <time class="post-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("MMM dd") }}</time>
         <a class="articlelist" href="{{ post.url }}">{{ post.data.title }}</a>
+        <span class="category-tag">{{ post.data.category }}</span>
       </div>
     {% endfor %}
   </div>
