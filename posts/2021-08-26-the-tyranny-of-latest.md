@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: The Tyranny of Latest
 slug: 2021-08-26-the-tyranny-of-latest
 tags:

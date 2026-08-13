@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: 2025's Notable Tools List
 slug: 2025-12-31-notable-tools-list
 ---

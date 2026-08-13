@@ -1,5 +1,6 @@
 ---
 layout: post
+category: tech
 title: Line Length Still Matters
 slug: 2022-07-02-control-your-linebreaks
 tags:
