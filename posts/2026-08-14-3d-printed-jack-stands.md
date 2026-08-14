@@ -20,3 +20,5 @@ The pads are relatively simple designs: a round puck with a few reliefs for the 
 model whipped up and off to the printer to print my first version. These were printed with [Bambu TPU for AMS](https://store.bblcdn.com/s5/default/0a98353dce6d486ca848b21d2b19a207.pdf).
 I don't believe this will be as durable as the rubber ones, but they got me through the weekend so I can get some on order.
 
+I'll be posting this to make my [Makerworld account](https://makerworld.com/en/@user_3462707022) as soon as I get some
+time to test the durablity.
