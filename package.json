@@ -27,6 +27,7 @@
     "markdown-it": "^14.2.0"
   },
   "dependencies": {
-    "@11ty/eleventy-img": "^7.0.0"
+    "@11ty/eleventy-img": "^7.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
   }
 }

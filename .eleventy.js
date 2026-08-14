@@ -1,8 +1,11 @@
 const { DateTime } = require("luxon");
 const fs = require("fs");
 const path = require("path");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(syntaxHighlight);
+
   eleventyConfig.addPassthroughCopy("static", {
     // Don't copy raw source images; the gallery shortcode generates its own
     // optimized webp versions directly into the output directory.
