@@ -314,6 +314,14 @@ article p {
   margin-bottom: 24px;
 }
 
+article p img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 8px 0 24px;
+}
+
 article ul, article ol {
   margin-bottom: 24px;
   padding-left: 20px;
